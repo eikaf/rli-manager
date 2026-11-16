@@ -97,6 +97,7 @@ ambiente. In alternativa è possibile creare un file `config.local.php` per
 sovrascrivere solo alcune costanti senza modificare `config.php`.
 
 > ⚠️ **Sicurezza**: non versionare mai `config.php`, `config.local.php` e
+> `db.php` con credenziali reali. Sono già esclusi da `.gitignore`.
 
 ### 3. Creare il database e importare lo schema
 
@@ -104,15 +105,13 @@ sovrascrivere solo alcune costanti senza modificare `config.php`.
 # Creare il database
 mysql -u root -p -e "CREATE DATABASE db_rli CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
-# Importare la struttura
+# Importare struttura e dati di riferimento (Stati Esteri Zxxx inclusi)
 mysql -u root -p db_rli < schema_db.sql
-
-# Applicare le migrazioni (in ordine)
-mysql -u root -p db_rli < migrations/002_allegati_su_disco.sql
-mysql -u root -p db_rli < migrations/003_tema_utente.sql
-mysql -u root -p db_rli < migrations/004_migliorie_soggetti.sql
-mysql -u root -p db_rli < migrations/005_migliorie_immobili.sql
 ```
+
+> ℹ️ `schema_db.sql` contiene l'intero schema consolidato (v1.0.0) e i dati di
+> riferimento di sistema (codici Belfiore degli Stati Esteri). Non sono più
+> necessari passaggi di migrazione manuale.
 
 ### 4. Popolare l'archivio dei comuni
 
@@ -168,7 +167,7 @@ RLI/
 ├── save_pratica.php          # Salvataggio pratica
 ├── lib/                      # Classi applicative (repository, calcolo, XML, ...)
 ├── assets/                   # CSS/JS (tema, dark mode, utility)
-├── migrations/               # Migrazioni SQL incrementali
+├── migrations/               # Migrazioni SQL incrementali (dalla v1.1.0)
 ├── scripts/                  # Script di importazione (comuni)
 ├── xsd/                      # Schemi XSD RLI12
 ├── tests/                    # Test e scenari di validazione
@@ -177,6 +176,14 @@ RLI/
 ├── db.example.php            # Template connessione database
 └── LICENSE                   # Licenza FSL-1.1-MIT
 ```
+
+---
+
+## 🗺️ Roadmap e TODO
+
+- [ ] **Allineamento testo Modello RLI PDF** ([`genera_modello_pdf.php`](genera_modello_pdf.php) / [`lib/RliPdfCoordinates.php`](lib/RliPdfCoordinates.php)): rifinitura delle coordinate X/Y e dell'allineamento dei campi stampati sul modello ministeriale [`Modello_RLI_Blank.pdf`](Modello_RLI_Blank.pdf).
+- [ ] **Gestione ricevute telematiche AdE**: estrazione automatica di protocollo, estremi di registrazione e codice identificativo contratto da file PDF e `.rel.p7m`, con associazione ai singoli eventi (`eventi_contratto`) e invio rapido al cliente via email/PEC.
+- [ ] **Opzione B — installazione/deployment direttamente dal terminale SSH** in `/var/www/html/RLI`: procedura guidata da riga di comando (clone, configurazione, import schema/migrazioni, popolamento comuni, permessi) per il deploy su server di produzione.
 
 ---
 
@@ -217,9 +224,3 @@ sezione *MIT Future License* del file `LICENSE`.
 Il software viene fornito "così com'è", senza garanzie di alcun tipo. L'utente è
 l'unico responsabile della verifica della correttezza dei dati trasmessi
 all'Agenzia delle Entrate e del rispetto della normativa fiscale vigente.
-
-## 🗺️ Roadmap e TODO
-
-- [ ] **Allineamento testo Modello RLI PDF (`genera_modello_pdf.php` / `RliPdfCoordinates.php`)**: rifinitura delle coordinate e dell'allineamento dei testi nei campi del modello ministeriale.
-- [ ] **Ricevute telematiche AdE**: parser automatico per PDF e `.rel.p7m` con estrazione del codice identificativo contratto, protocollo ed estremi di registrazione e abbinamento ai singoli eventi.
-- [ ] **Invio ricevute ai clienti**: invio diretto via email/PEC della ricevuta acquisita dalla scheda dell'evento contrattuale.
