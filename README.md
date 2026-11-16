@@ -67,18 +67,50 @@ telematicamente. Le funzionalità principali includono:
 |------------|-----------------------|
 | **PHP** | 8.x con estensioni `pdo_mysql`, `dom`, `xml`, `mbstring`, `openssl` |
 | **Database** | MySQL 8.0+ oppure MariaDB 10.5+ |
-| **Web server** | Apache (con `mod_rewrite`) oppure Nginx |
+| **Web server** | Apache (con `mod_rewrite`), Nginx oppure XAMPP (Windows/macOS) |
 | **Composer** | Opzionale (per l'autoload delle classi in `lib/`) |
 
 ---
 
 ## Guida rapida all'installazione
 
-### 1. Ottenere il codice
+### Opzione A — Installazione su Windows con XAMPP
 
-```bash
-git clone <url-del-repository> RLI
-cd RLI
+1. **Scaricare i file nella cartella `htdocs`:**
+   - Scarica o clona il repository dentro `C:\xampp\htdocs\RLI`:
+     ```cmd
+     cd C:\xampp\htdocs
+     git clone [https://github.com/eikaf/rli-manager.git](https://github.com/eikaf/rli-manager.git) RLI
+     ```
+2. **Verificare le estensioni PHP:**
+   - Dal **Pannello di Controllo di XAMPP**, clicca su **Config → PHP (`php.ini`)** accanto ad Apache e assicurati che siano attive (senza `;` davanti) le estensioni `pdo_mysql`, `mbstring`, `openssl`, `xml` e `dom`.
+   - Avvia i moduli **Apache** e **MySQL**.
+3. **Configurare database e percorsi:**
+   - Duplica `config.example.php` in `config.php` e `db.example.php` in `db.php`.
+   - In `db.php`, imposta i parametri standard di XAMPP (`host = '127.0.0.1'`, `dbname = 'db_rli'`, `user = 'root'`, `pass = ''`).
+   - Crea una cartella esterna alla document root per gli allegati (es. `C:\xampp\rli_storage`) e imposta in `config.php`:
+     ```php
+     define('RLI_STORAGE_PATH', 'C:/xampp/rli_storage');
+     ```
+4. **Creare il database e importare lo schema:**
+   - Apri `http://localhost/phpmyadmin`, crea un nuovo database chiamato **`db_rli`** con codifica `utf8mb4_unicode_ci`, selezionalo e importa il file `schema_db.sql` dalla scheda **Importa**.
+5. **Popolare l'archivio dei comuni:**
+   - Posiziona il file `comuni.json` nella cartella `C:\xampp\htdocs\RLI`, clicca sul pulsante **Shell** nel pannello di XAMPP ed esegui:
+     ```cmd
+     cd C:\xampp\htdocs\RLI
+     php scripts/import_comuni.php
+     ```
+6. **Primo accesso:**
+   - Apri il browser all'indirizzo **`http://localhost/RLI`** e accedi con le credenziali amministrative iniziali (cambiando subito la password dal profilo).
+
+---
+
+### Opzione B — Installazione su Linux (Apache / Nginx)
+
+1. **Ottenere il codice:**
+   ```bash
+   git clone [https://github.com/eikaf/rli-manager.git](https://github.com/eikaf/rli-manager.git) RLI
+   cd RLI
 ```
 
 ### 2. Configurare l'applicazione
