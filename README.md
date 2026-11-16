@@ -97,7 +97,6 @@ ambiente. In alternativa è possibile creare un file `config.local.php` per
 sovrascrivere solo alcune costanti senza modificare `config.php`.
 
 > ⚠️ **Sicurezza**: non versionare mai `config.php`, `config.local.php` e
-> `db.php` con credenziali reali. Sono già esclusi da `.gitignore`.
 
 ### 3. Creare il database e importare lo schema
 
