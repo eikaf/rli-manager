@@ -218,3 +218,9 @@ sezione *MIT Future License* del file `LICENSE`.
 Il software viene fornito "così com'è", senza garanzie di alcun tipo. L'utente è
 l'unico responsabile della verifica della correttezza dei dati trasmessi
 all'Agenzia delle Entrate e del rispetto della normativa fiscale vigente.
+
+## 🗺️ Roadmap e TODO
+
+- [ ] **Allineamento testo Modello RLI PDF (`genera_modello_pdf.php` / `RliPdfCoordinates.php`)**: rifinitura delle coordinate e dell'allineamento dei testi nei campi del modello ministeriale.
+- [ ] **Ricevute telematiche AdE**: parser automatico per PDF e `.rel.p7m` con estrazione del codice identificativo contratto, protocollo ed estremi di registrazione e abbinamento ai singoli eventi.
+- [ ] **Invio ricevute ai clienti**: invio diretto via email/PEC della ricevuta acquisita dalla scheda dell'evento contrattuale.
