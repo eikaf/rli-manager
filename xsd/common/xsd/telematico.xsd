@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://sogei.it/telematico" targetNamespace="http://sogei.it/telematico" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Messaggio">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Intestazione" type="tm:IntestazioneType" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="Contenuto" type="tm:ContenutoType" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="IntestazioneType">
+		<xs:sequence>
+			<xs:element name="CodiceFiscaleFornitore" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="SpazioServizioTelematico" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContenutoType">
+		<xs:sequence>
+			<xs:element ref="tm:Fornitura"/>
+		</xs:sequence>
+		<xs:attribute name="CodiceFornitura" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="Fornitura" abstract="true"/>
+</xs:schema>

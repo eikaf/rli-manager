@@ -1,0 +1,627 @@
+/**
+ * theme.css — Dark mode per RLI Manager.
+ *
+ * Attivato dall'attributo data-theme="dark" sul tag <html>.
+ * Usa !important per avere la precedenza sugli stili inline delle pagine.
+ */
+
+[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+/* Sfondo e testo base */
+[data-theme="dark"] html,
+[data-theme="dark"] body {
+    background: #1a202c !important;
+    color: #e2e8f0 !important;
+}
+
+/* Contenitori / card */
+[data-theme="dark"] .card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .filter-form,
+[data-theme="dark"] .comunicazione-item,
+[data-theme="dark"] .info-box,
+[data-theme="dark"] .warn-box,
+[data-theme="dark"] .edit-banner,
+[data-theme="dark"] .ade-code-box,
+[data-theme="dark"] .fiscal-summary,
+[data-theme="dark"] .riepilogo,
+[data-theme="dark"] .check-item,
+[data-theme="dark"] .step,
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .dropdown-menu,
+[data-theme="dark"] .searchable .dropdown {
+    background: #2d3748 !important;
+    color: #e2e8f0 !important;
+    border-color: #4a5568 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Titoli e testi forti */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6,
+[data-theme="dark"] strong,
+[data-theme="dark"] label {
+    color: #f8fafc !important;
+}
+
+/* Testi secondari */
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] td,
+[data-theme="dark"] li,
+[data-theme="dark"] .hint,
+[data-theme="dark"] .info {
+    color: #cbd5e0 !important;
+}
+
+[data-theme="dark"] a {
+    color: #63b3ed !important;
+}
+
+/* Campi form */
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+    background: #1a202c !important;
+    color: #e2e8f0 !important;
+    border-color: #4a5568 !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+    color: #718096 !important;
+}
+
+/* Tabelle */
+[data-theme="dark"] table {
+    border-color: #4a5568 !important;
+}
+
+[data-theme="dark"] th {
+    background: #1a202c !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] td {
+    border-color: #4a5568 !important;
+}
+
+[data-theme="dark"] tr:hover {
+    background: #374151 !important;
+}
+
+/* Bottoni neutri */
+[data-theme="dark"] .btn-gray {
+    background: #4a5568 !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .btn-gray:hover {
+    background: #718096 !important;
+}
+
+/* Paginazione */
+[data-theme="dark"] .pagination a {
+    background: #2d3748 !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .pagination a:hover {
+    background: #4a5568 !important;
+}
+
+[data-theme="dark"] .pagination .info {
+    color: #a0aec0 !important;
+}
+
+/* Alert */
+[data-theme="dark"] .alert-success {
+    background: #22543d !important;
+    color: #c6f6d5 !important;
+}
+
+[data-theme="dark"] .alert-error {
+    background: #742a2a !important;
+    color: #fed7d7 !important;
+}
+
+[data-theme="dark"] .alert-warning {
+    background: #744210 !important;
+    color: #fefcbf !important;
+}
+
+/* Comunicazioni */
+[data-theme="dark"] .com-oggetto {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .com-corpo {
+    color: #cbd5e0 !important;
+}
+
+[data-theme="dark"] .com-meta {
+    color: #a0aec0 !important;
+}
+
+/* Wizard / step */
+[data-theme="dark"] .step-dot {
+    background: #4a5568 !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .step-dot.active {
+    background: #4299e1 !important;
+}
+
+[data-theme="dark"] .step-dot.done {
+    background: #48bb78 !important;
+}
+
+/* Liste di selezione */
+[data-theme="dark"] .check-list {
+    background: transparent !important;
+}
+
+[data-theme="dark"] .check-item:hover {
+    background: #374151 !important;
+}
+
+/* Dropdown ricercabili */
+[data-theme="dark"] .searchable input {
+    background: #1a202c !important;
+}
+
+[data-theme="dark"] .searchable .dropdown {
+    background: #2d3748 !important;
+    border-color: #4a5568 !important;
+}
+
+[data-theme="dark"] .searchable .option:hover,
+[data-theme="dark"] .searchable .option.highlighted {
+    background: #4a5568 !important;
+}
+
+/* Modali */
+[data-theme="dark"] .modal-overlay {
+    background: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Topbar */
+[data-theme="dark"] .topbar {
+    background: #0f1419 !important;
+}
+
+[data-theme="dark"] .topbar .dropdown-menu {
+    background: #2d3748 !important;
+}
+
+[data-theme="dark"] .topbar .dropdown-menu a {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .topbar .dropdown-menu a:hover {
+    background: #4a5568 !important;
+}
+
+/* Login */
+[data-theme="dark"] .login-box {
+    background: #2d3748 !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .login-box input {
+    background: #1a202c !important;
+    color: #e2e8f0 !important;
+    border-color: #4a5568 !important;
+}
+
+/* Profilo */
+[data-theme="dark"] .info-row .lbl {
+    color: #a0aec0 !important;
+}
+
+[data-theme="dark"] .info-row .val {
+    color: #e2e8f0 !important;
+}
+
+/* Scadenze */
+[data-theme="dark"] .scad-alert.warn {
+    background: #744210 !important;
+    color: #fefcbf !important;
+}
+
+[data-theme="dark"] .scad-alert.danger {
+    background: #742a2a !important;
+    color: #fed7d7 !important;
+}
+
+/* Password */
+[data-theme="dark"] .pwd-wrapper input {
+    background: #1a202c !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .pwd-toggle {
+    color: #a0aec0 !important;
+}
+
+[data-theme="dark"] hr {
+    border-color: #4a5568 !important;
+}
+
+/* ===== Pulsanti colorati: testo bianco e sfondi più profondi ===== */
+[data-theme="dark"] .btn-primary {
+    background: #2563eb !important;
+    color: #ffffff !important;
+}
+[data-theme="dark"] .btn-primary:hover {
+    background: #1d4ed8 !important;
+}
+[data-theme="dark"] .btn-green {
+    background: #16a34a !important;
+    color: #ffffff !important;
+}
+[data-theme="dark"] .btn-green:hover {
+    background: #15803d !important;
+}
+[data-theme="dark"] .btn-orange {
+    background: #d97706 !important;
+    color: #ffffff !important;
+}
+[data-theme="dark"] .btn-orange:hover {
+    background: #b45309 !important;
+}
+[data-theme="dark"] .btn-red {
+    background: #dc2626 !important;
+    color: #ffffff !important;
+}
+[data-theme="dark"] .btn-red:hover {
+    background: #b91c1c !important;
+}
+[data-theme="dark"] .btn-gray {
+    background: #4a5568 !important;
+    color: #e2e8f0 !important;
+}
+[data-theme="dark"] .btn-gray:hover {
+    background: #718096 !important;
+}
+
+/* ===== Badge di stato ===== */
+[data-theme="dark"] .badge-ATTIVO,
+[data-theme="dark"] .badge-L2 {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: #6ee7b7 !important;
+    border-color: rgba(16, 185, 129, 0.45) !important;
+}
+[data-theme="dark"] .badge-PROROGATO {
+    background: rgba(59, 130, 246, 0.2) !important;
+    color: #93c5fd !important;
+    border-color: rgba(59, 130, 246, 0.45) !important;
+}
+[data-theme="dark"] .badge-CESSATO {
+    background: rgba(245, 158, 11, 0.2) !important;
+    color: #fcd34d !important;
+    border-color: rgba(245, 158, 11, 0.45) !important;
+}
+[data-theme="dark"] .badge-RISOLTO,
+[data-theme="dark"] .badge-SCADUTO {
+    background: rgba(148, 163, 184, 0.2) !important;
+    color: #cbd5e1 !important;
+    border-color: rgba(148, 163, 184, 0.45) !important;
+}
+[data-theme="dark"] .badge-BOZZA {
+    background: rgba(234, 179, 8, 0.2) !important;
+    color: #fde047 !important;
+    border-color: rgba(234, 179, 8, 0.45) !important;
+}
+[data-theme="dark"] .badge-share {
+    background: rgba(139, 92, 246, 0.2) !important;
+    color: #c4b5fd !important;
+    border-color: rgba(139, 92, 246, 0.45) !important;
+}
+[data-theme="dark"] .badge-ade {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: #6ee7b7 !important;
+    border-color: rgba(16, 185, 129, 0.45) !important;
+}
+[data-theme="dark"] .badge-ok {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: #6ee7b7 !important;
+}
+[data-theme="dark"] .badge-info {
+    background: rgba(59, 130, 246, 0.2) !important;
+    color: #93c5fd !important;
+}
+[data-theme="dark"] .badge-warn,
+[data-theme="dark"] .badge-event {
+    background: rgba(245, 158, 11, 0.2) !important;
+    color: #fcd34d !important;
+}
+[data-theme="dark"] .badge-err {
+    background: rgba(239, 68, 68, 0.2) !important;
+    color: #fca5a5 !important;
+}
+[data-theme="dark"] .badge-contratto {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: #6ee7b7 !important;
+}
+[data-theme="dark"] .badge-count {
+    background: rgba(59, 130, 246, 0.22) !important;
+    color: #93c5fd !important;
+}
+
+/* Badge tipologia soggetti (soggetti.php) */
+[data-theme="dark"] .badge-LOC {
+    background: rgba(59, 130, 246, 0.22) !important;
+    color: #93c5fd !important;
+}
+[data-theme="dark"] .badge-COND {
+    background: rgba(245, 158, 11, 0.22) !important;
+    color: #fcd34d !important;
+}
+[data-theme="dark"] .badge-ENT {
+    background: rgba(139, 92, 246, 0.22) !important;
+    color: #c4b5fd !important;
+}
+
+/* Canali comunicazioni (comunicazioni.php) */
+[data-theme="dark"] .com-tipo {
+    background: rgba(148, 163, 184, 0.22) !important;
+    color: #cbd5e1 !important;
+}
+[data-theme="dark"] .com-tipo.email {
+    background: rgba(59, 130, 246, 0.22) !important;
+    color: #93c5fd !important;
+}
+[data-theme="dark"] .com-tipo.pec {
+    background: rgba(245, 158, 11, 0.22) !important;
+    color: #fcd34d !important;
+}
+[data-theme="dark"] .com-tipo.raccomandata {
+    background: rgba(16, 185, 129, 0.22) !important;
+    color: #6ee7b7 !important;
+}
+
+/* Priorità notifiche (notifiche.php) */
+[data-theme="dark"] .badge-p {
+    background: rgba(148, 163, 184, 0.22) !important;
+    color: #cbd5e1 !important;
+}
+[data-theme="dark"] .badge-p.info {
+    background: rgba(59, 130, 246, 0.22) !important;
+    color: #93c5fd !important;
+}
+[data-theme="dark"] .badge-p.warning {
+    background: rgba(245, 158, 11, 0.22) !important;
+    color: #fcd34d !important;
+}
+[data-theme="dark"] .badge-p.critical {
+    background: rgba(239, 68, 68, 0.22) !important;
+    color: #fca5a5 !important;
+}
+
+/* ===== Card contratti in dashboard ===== */
+[data-theme="dark"] .contratto-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+}
+[data-theme="dark"] .contratto-card.BOZZA {
+    background: #1e293b !important;
+}
+[data-theme="dark"] .contratto-card.ATTIVO {
+    border-left-color: #48bb78 !important;
+}
+[data-theme="dark"] .contratto-card.PROROGATO {
+    border-left-color: #4299e1 !important;
+}
+[data-theme="dark"] .contratto-card.CESSATO {
+    border-left-color: #ed8936 !important;
+}
+[data-theme="dark"] .contratto-card.RISOLTO,
+[data-theme="dark"] .contratto-card.SCADUTO {
+    border-left-color: #a0aec0 !important;
+}
+[data-theme="dark"] .contratto-card.BOZZA {
+    border-left-color: #ecc94b !important;
+}
+[data-theme="dark"] .contratto-card .field-value {
+    color: #e2e8f0 !important;
+}
+[data-theme="dark"] .contratto-card .contratto-actions {
+    border-top-color: #334155 !important;
+}
+
+/* ===== Contatori statistiche e titoli card (alto contrasto) ===== */
+[data-theme="dark"] .stat-card .value {
+    color: #f8fafc !important;
+}
+[data-theme="dark"] .stat-card .label {
+    color: #cbd5e1 !important;
+}
+[data-theme="dark"] .stat-sub-item.reg {
+    color: #6ee7b7 !important;
+}
+[data-theme="dark"] .stat-sub-item.dareg {
+    color: #fcd34d !important;
+}
+[data-theme="dark"] .contratto-title {
+    color: #f8fafc !important;
+}
+[data-theme="dark"] .contratto-id {
+    color: #94a3b8 !important;
+}
+[data-theme="dark"] .contratto-header,
+[data-theme="dark"] .contratto-body {
+    color: #e2e8f0 !important;
+}
+[data-theme="dark"] .card h1,
+[data-theme="dark"] .card h2,
+[data-theme="dark"] .card h3,
+[data-theme="dark"] .card h4 {
+    color: #f8fafc !important;
+}
+
+/* Titoli/etichette generici usati in contract.php, backup.php, eventi, ecc. */
+[data-theme="dark"] .field-label,
+[data-theme="dark"] .event-title,
+[data-theme="dark"] .title {
+    color: #f8fafc !important;
+}
+[data-theme="dark"] .field-value,
+[data-theme="dark"] .event-header,
+[data-theme="dark"] .desc {
+    color: #e2e8f0 !important;
+}
+[data-theme="dark"] .ravv-field .lbl {
+    color: #cbd5e1 !important;
+}
+[data-theme="dark"] .ravv-field .val {
+    color: #f8fafc !important;
+}
+
+/* Quota/Cedolare per-immobile nel wizard contratto */
+[data-theme="dark"] .imm-locatori {
+    border-top-color: #4a5568 !important;
+}
+[data-theme="dark"] .imm-loc-name {
+    color: #cbd5e1 !important;
+}
+[data-theme="dark"] .imm-quota {
+    background: #1a202c !important;
+    color: #e2e8f0 !important;
+    border-color: #4a5568 !important;
+}
+[data-theme="dark"] .imm-ced-label {
+    color: #cbd5e1 !important;
+}
+
+/* ===== Blocco B: stato occupazione immobili ===== */
+[data-theme="dark"] .badge-libero {
+    background: rgba(16, 185, 129, 0.22) !important;
+    color: #6ee7b7 !important;
+}
+[data-theme="dark"] .badge-locato {
+    background: rgba(59, 130, 246, 0.22) !important;
+    color: #93c5fd !important;
+}
+
+/* Banner duplicazione immobile */
+[data-theme="dark"] .duplica-banner {
+    background: rgba(59, 130, 246, 0.15) !important;
+    color: #93c5fd !important;
+    border-left-color: #4299e1 !important;
+}
+
+/* Modale immobile */
+[data-theme="dark"] .immobile-modal {
+    background: #2d3748 !important;
+    color: #e2e8f0 !important;
+}
+[data-theme="dark"] .immobile-modal .im-header {
+    border-bottom-color: #4a5568 !important;
+}
+[data-theme="dark"] .immobile-modal .im-header h3 {
+    color: #f8fafc !important;
+}
+[data-theme="dark"] .immobile-modal label {
+    color: #cbd5e1 !important;
+}
+[data-theme="dark"] .immobile-modal input,
+[data-theme="dark"] .immobile-modal select,
+[data-theme="dark"] .immobile-modal textarea {
+    background: #1a202c !important;
+    color: #e2e8f0 !important;
+    border-color: #4a5568 !important;
+}
+[data-theme="dark"] .immobile-modal .im-actions {
+    border-top-color: #4a5568 !important;
+}
+[data-theme="dark"] .immobile-modal .im-btn-gray {
+    background: #4a5568 !important;
+    color: #e2e8f0 !important;
+}
+
+/* ===== Intermediario / Ravvedimento / box chiari ===== */
+[data-theme="dark"] .intermediario-box {
+    background: rgba(245, 158, 11, 0.12) !important;
+    border-color: #d97706 !important;
+    color: #fcd34d !important;
+}
+[data-theme="dark"] .intermediario-box h3 {
+    color: #fcd34d !important;
+}
+[data-theme="dark"] .ravv-box {
+    background: rgba(234, 179, 8, 0.12) !important;
+    border-color: #d69e2e !important;
+    color: #fde047 !important;
+}
+[data-theme="dark"] .ravv-box h3 {
+    color: #fde047 !important;
+}
+[data-theme="dark"] .ravv-box.ok {
+    background: rgba(16, 185, 129, 0.12) !important;
+    border-color: #48bb78 !important;
+}
+[data-theme="dark"] .ravv-box.ok h3 {
+    color: #6ee7b7 !important;
+}
+[data-theme="dark"] .ravv-box.error {
+    background: rgba(239, 68, 68, 0.12) !important;
+    border-color: #e53e3e !important;
+}
+[data-theme="dark"] .ravv-box.error h3 {
+    color: #fca5a5 !important;
+}
+[data-theme="dark"] .ravv-field {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+[data-theme="dark"] .ravv-total {
+    background: rgba(234, 179, 8, 0.12) !important;
+}
+[data-theme="dark"] .allegato-box {
+    background: rgba(59, 130, 246, 0.12) !important;
+    border-color: #4299e1 !important;
+}
+[data-theme="dark"] .allegato-box.optional {
+    background: #1e293b !important;
+    border-color: #4a5568 !important;
+}
+[data-theme="dark"] .ok-box {
+    background: rgba(16, 185, 129, 0.12) !important;
+    border-left-color: #48bb78 !important;
+}
+[data-theme="dark"] .toggle-section {
+    background: #1e293b !important;
+    border-color: #4a5568 !important;
+}
+[data-theme="dark"] .file-input,
+[data-theme="dark"] .checkbox-row-light,
+[data-theme="dark"] .table-head-light,
+[data-theme="dark"] .check-list-light {
+    background: #1a202c !important;
+    border-color: #4a5568 !important;
+}
+[data-theme="dark"] .status-ok {
+    background: rgba(16, 185, 129, 0.12) !important;
+    color: #6ee7b7 !important;
+}
+[data-theme="dark"] .status-warn {
+    background: rgba(239, 68, 68, 0.12) !important;
+    color: #fca5a5 !important;
+}
+[data-theme="dark"] .iban-box {
+    background: rgba(59, 130, 246, 0.12) !important;
+    border-color: #4299e1 !important;
+}
+[data-theme="dark"] .iban-box-ok {
+    background: rgba(16, 185, 129, 0.12) !important;
+    border-color: #48bb78 !important;
+}

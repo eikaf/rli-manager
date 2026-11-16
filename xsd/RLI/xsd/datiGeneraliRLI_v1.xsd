@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2012 sp1 (http://www.altova.com) by Vincenzo (Sogei S.p.A.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cm="urn:www.agenziaentrate.gov.it:specificheTecniche:common:v2" xmlns:sc="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:common:v2" xmlns:reg="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:reg:v1" xmlns:loc="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:loc:v1" targetNamespace="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:loc:v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:annotation>
+		<xs:documentation xml:lang="it"><![CDATA[
+		Versione 1.0 - 15/02/12
+		]]></xs:documentation>
+	</xs:annotation>
+	<xs:import namespace="urn:www.agenziaentrate.gov.it:specificheTecniche:common:v2" schemaLocation="../../common/xsd/fornitura_v2.xsd"/>
+	<xs:import namespace="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:common:v2" schemaLocation="../../common/xsd/datiFiscali_v2.xsd"/>
+	<xs:import namespace="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:reg:v1" schemaLocation="../../registro/xsd/typesReg_v1.xsd"/>
+	<!--	<xs:include schemaLocation="typesIRAP_v2.xsd"/> -->
+	<xs:element name="DatiGenerali">
+		<xs:complexType>
+			<xs:sequence>
+							<xs:element name="UfficioCompetente" minOccurs="0">
+					<xs:annotation>
+									<xs:documentation>Obbligatorio nel caso di prima registrazione.
+Non deve essere presente nel caso di adempimenti successivi</xs:documentation>
+					</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="UfficioTerritoriale" type="reg:UfficioTerritoriale_Type"/>
+									</xs:sequence>
+								</xs:complexType>
+				</xs:element>
+				<xs:element name="Versamento" type="reg:Versamento_Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Dato obbligatorio in presenza di importo da versare diverso da zero.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ImportoDaVersare" type="cm:DatoVP_Type">
+					<xs:annotation>
+						<xs:documentation>Deve essere uguale alla somma degli importi da versare
+Può anche essere uguale a zero. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Dati_Generali_Type">
+		<xs:sequence/>
+	</xs:complexType>
+</xs:schema>

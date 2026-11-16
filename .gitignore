@@ -1,0 +1,61 @@
+# ============================================================
+# RLI Manager — .gitignore
+# Esclude configurazioni sensibili, dati reali e file generati.
+# ============================================================
+
+# --- Configurazioni con segreti (NON versionare) ---
+config.php
+config.local.php
+db.php
+.env
+.env.*
+!.env.example
+
+# --- Dump del database con dati reali ---
+backup_*.sql
+*.dump
+*.sql.gz
+*.sql.bz2
+# NB: schema_db.sql e migrations/*.sql sono versionati (struttura, senza dati).
+
+# --- File generati / output ---
+*.xml
+*.rli
+*.p7m
+*.pdf
+*.zip
+# Eccezione: modello PDF vuoto necessario alla generazione documenti.
+!Modello_RLI_Blank.pdf
+
+# --- Dati importati di grandi dimensioni ---
+comuni.json
+
+# --- Cartelle di upload / storage / output / log ---
+logs/*
+!logs/htaccess
+storage/
+allegati/
+uploads/
+upload/
+export/
+exports/
+ricevute/
+tmp/
+temp/
+cache/
+
+# --- Dipendenze ---
+/vendor/
+
+# --- Editor / IDE ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- File di sistema ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~

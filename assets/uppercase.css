@@ -1,0 +1,131 @@
+@import url('theme.css');
+
+/**
+ * uppercase.css
+ * Forza la visualizzazione MAIUSCOLA su tutti i campi testo dell'applicazione.
+ * Il valore REALE resta invariato finché non viene inviato il form.
+ */
+
+/* Applica uppercase a tutti gli input di testo "anagrafici" */
+input[type="text"]:not(.no-uppercase):not([data-no-uppercase]),
+input[type="email"]:not(.no-uppercase),
+input[type="search"]:not(.no-uppercase),
+textarea:not(.no-uppercase),
+.searchable input[type="text"]:not(.no-uppercase) {
+    text-transform: uppercase;
+}
+
+/* Applica anche ai campi con classi specifiche (per chiarezza) */
+.uppercase,
+input[name="codice_fiscale"],
+input[name="cf"],
+input[name="cognome"],
+input[name="nome"],
+input[name="comune"],
+input[name="comune_nascita"],
+input[name="comune_cat"],
+input[name="provincia"],
+input[name="prov_nascita"],
+input[name="codice_comune"],
+input[name="catasto"],
+input[name="sezione"],
+input[name="toponimo"],
+input[name="indirizzo"],
+input[name="via"],
+input[name="civico"],
+input[name="sub"],
+input[name="subalterno"],
+input[name="foglio"],
+input[name="particella"],
+input[name="zona_censuaria"],
+input[name="classe"],
+input[name="categoria"],
+input[name="identificativo_interno"],
+input[name="desc"],
+input[name="ufficio"],
+input[name="ufficio_territoriale"],
+input[name="id_cont"],
+input[name="id_contratto_univoco"],
+input[name="annualita"],
+input[name="serie_registrazione"],
+input[name="numero_registrazione"],
+input[name="sottonumero_registrazione"],
+input[name="cf_rappresentante"],
+input[name="cognome_rappresentante"],
+input[name="nome_rappresentante"],
+input[name="cf_garante"],
+input[name="cf_garante2"],
+input[name="natura"],
+input[name="partita_tavolare"],
+input[name="corpo_tavolare"],
+input[name="porzione_materiale"] {
+    text-transform: uppercase;
+}
+
+/* ECCEZIONI: questi campi NON devono essere maiuscoli */
+input[type="email"]:not(.uppercase),
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+input[type="url"],
+input[type="file"] {
+    text-transform: none;
+}
+
+/* Placeholder: mantenuto lowercase per leggibilità */
+input::placeholder {
+    text-transform: none;
+    text-transform: initial;
+}
+
+/* Select: uppercase sui select con opzioni testuali "anagrafiche" */
+select.uppercase,
+select[name="provincia"],
+select[name="tipo_catasto"],
+select[name="tipologia_default"] {
+    text-transform: uppercase;
+}
+
+/* Feedback visivo: quando un campo è uppercase e ha focus, mostra un bordo più marcato */
+input:focus:not(.no-uppercase) {
+    text-transform: uppercase;
+}
+.cf-feedback { padding: 8px 12px; border-radius: 6px; font-size: 0.85em; margin-top: -4px; margin-bottom: 12px; display: none; }
+.cf-feedback.ok { background: #c6f6d5; color: #22543d; display: block; }
+.cf-feedback.warn { background: #feebc8; color: #7b341e; display: block; }
+.cf-feedback.err { background: #fed7d7; color: #742a2a; display: block; }
+.cf-valid { border-color: #48bb78 !important; }
+.cf-warning { border-color: #ed8936 !important; background-color: #fffaf0 !important; }
+.cf-error { border-color: #e53e3e !important; background-color: #fff5f5 !important; }
+.auto-filled { background-color: #f0fff4 !important; border-color: #68d391 !important; }
+
+/* Campi in errore */
+.field-error {
+    border-color: #e53e3e !important;
+    background-color: #fff5f5 !important;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15) !important;
+}
+.field-ok {
+    border-color: #48bb78 !important;
+    background-color: #f0fff4 !important;
+}
+.field-error-message {
+    color: #e53e3e;
+    font-size: 0.8em;
+    margin-top: -8px;
+    margin-bottom: 10px;
+    display: block;
+}
+.error-banner {
+    background: #fed7d7;
+    color: #742a2a;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #e53e3e;
+    display: none;
+}
+.error-banner.visible {
+    display: block;
+}

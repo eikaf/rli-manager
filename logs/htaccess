@@ -1,0 +1,3 @@
+# Protezione aggiuntiva: nega l'accesso HTTP diretto ai log XML.
+# (I nuovi log vengono comunque scritti in RLI_STORAGE_PATH/logs, fuori dalla docroot.)
+Require all denied

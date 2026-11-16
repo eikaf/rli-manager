@@ -1,0 +1,1420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2012 sp1 (http://www.altova.com) by Vincenzo (Sogei S.p.A.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cm="urn:www.agenziaentrate.gov.it:specificheTecniche:common:v2" xmlns:sc="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:common:v2" xmlns:reg="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:reg:v1" xmlns:loc="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:loc:v1" targetNamespace="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:loc:v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:annotation>
+		<xs:documentation xml:lang="it"><![CDATA[
+		Versione 1.0 - 15/02/12
+		]]></xs:documentation>
+	</xs:annotation>
+	<xs:import namespace="urn:www.agenziaentrate.gov.it:specificheTecniche:common:v2" schemaLocation="../../common/xsd/fornitura_v2.xsd"/>
+	<xs:import namespace="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:common:v2" schemaLocation="../../common/xsd/datiFiscali_v2.xsd"/>
+	<xs:import namespace="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:reg:v1" schemaLocation="../../registro/xsd/typesReg_v1.xsd"/>
+	<!--	<xs:include schemaLocation="typesIRAP_v2.xsd"/> -->
+	<xs:element name="Documento" type="loc:Documento_RLI_Type"/>
+	<xs:complexType name="Documento_RLI_Type">
+		<xs:complexContent>
+			<xs:extension base="cm:Documento_Type">
+				<xs:sequence>
+					<xs:element name="Frontespizio">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="IdentificativoProdSoftware" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="cm:DatoAN_Type">
+											<xs:maxLength value="16"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="NumeroModuliCompilati">
+									<xs:simpleType>
+										<xs:restriction base="cm:DatoNU_Type">
+											<xs:maxLength value="3"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="IDContratto">
+									<xs:annotation>
+										<xs:documentation>Identificativo del contratto.
+Assegnato dall'utente e obbligatorio</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="reg:DatoANU_Type">
+											<xs:maxLength value="20"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Richiedente">
+									<xs:annotation>
+										<xs:documentation>Nel caso di adempimenti successivi deve coincidere con una delle parti del contratto precedentemente registrato (a meno del caso di soggetto subentrato); la non corrispondenza comporta lo scarto della richiesta in fase di accettazione.</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="CodiceFiscale" type="cm:DatoCF_Type">
+												<xs:annotation>
+													<xs:documentation>Il codice fiscale deve essere formalmente corretto e registrato in Anagrafe tributaria.
+La non registrazione comporta lo scarto della richiesta in fase di accettazione.
+Nel caso di omocodia del codice fiscale risolta dall’Agenzia delle Entrate con l’attribuzione di un nuovo codice fiscale, l’indicazione nella richiesta del precedente codice fiscale (omocodice)  comporta,  in sede di accoglimento delle comunicazioni trasmesse in via telematica,  lo  scarto della stessa.
+Nel caso di prima registrazione, se tipologia di richiedente = 1 deve essere uguale ad uno dei codici fiscali presenti nel quadro B (locatori o conduttori).</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:choice>
+												<xs:element name="PersoneFisiche">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Cognome">
+																<xs:simpleType>
+																	<xs:restriction base="cm:DatoAN_Type">
+																		<xs:maxLength value="24"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="Nome">
+																<xs:simpleType>
+																	<xs:restriction base="cm:DatoAN_Type">
+																		<xs:maxLength value="20"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="SoggettiDiversiDaPF">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Denominazione">
+																<xs:simpleType>
+																	<xs:restriction base="cm:DatoAN_Type">
+																		<xs:maxLength value="60"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+											<xs:element name="Rappresentante" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>La sezione e' obbligatoria per i contribuenti diversi dalle persone fisiche.
+La sezione puo' essere presente anche per i contribuenti persone fisiche</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="CodiceFiscaleRappresentante" type="cm:DatoCF_Type">
+															<xs:annotation>
+																<xs:documentation>Deve essere diverso dal codice fiscale del contribuente</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="CognomeRappresentante">
+															<xs:simpleType>
+																<xs:restriction base="cm:DatoAN_Type">
+																	<xs:maxLength value="24"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="NomeRappresentante">
+															<xs:simpleType>
+																<xs:restriction base="cm:DatoAN_Type">
+																	<xs:maxLength value="20"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="CodiceCarica" type="sc:Codice_Carica_Type">
+															<xs:annotation>
+																<xs:documentation>Puo' assumere uno dei seguenti valori:
+1, 2, 3, 4, 5, 7, 8, 11, 13, 14, 15</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Firma" type="cm:DatoCB_Type"/>
+											<xs:element name="TipologiaRichiedente">
+												<xs:annotation>
+													<xs:documentation>Nel caso di adempimenti successivi è ammesso solo il valore 1</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="cm:DatoN1_Type">
+														<xs:enumeration value="1">
+															<xs:annotation>
+																<xs:documentation><![CDATA[parte del contratto]]></xs:documentation>
+															</xs:annotation>
+														</xs:enumeration>
+														<xs:enumeration value="2">
+															<xs:annotation>
+																<xs:documentation><![CDATA[mediatore del contratto]]></xs:documentation>
+															</xs:annotation>
+														</xs:enumeration>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="Subentro" type="cm:DatoCB_Type" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Può essere presente solo in caso di pagamento annualità successive, proroga, risoluzione e Conguaglio d’imposta ma non in caso di cessione o prima registrazione</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="TipologiaContratto" type="reg:TipologiaContratto_Type">
+									<xs:annotation>
+										<xs:documentation>Indicare il codice corrispondente alla tipologia di contratto sulla base della tabella presente nelle istruzioni - L1 = Locazione di immobile ad uso abitativo; L2 = Locazione agevolata di immobile ad uso abitativo; L3 = Locazione di immobile ad uso abitativo (contratto assoggettato ad IVA); L4 = Locazione finanziaria di immobile ad uso abitativo; S1 = Locazione di immobile ad uso diverso dall'abitativo; S2 = Locazione di immobile strumentale con locatore soggetto ad IVA; S3 = Locazione Finanziaria di immobile ad uso diverso dall'abitativo; T1 = Affitto di fondo rustico; T2 = Affitto di fondo rustico agevolato; T3 = Affitto di terreni ed aree non edificabili, cave e torbiere; T4 = Affitto di terreni edificabili o non edificabili destinati a parcheggio (contratto assoggettato ad IVA).</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="DataInizio" type="cm:DatoDN_Type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Nel caso di prima registrazione o se Tipologia di adempimento è uguale a 1 (Annualità successive) o 2 (Proroga) è obbligatorio in assenza di condizione sospensiva.
+Non deve essere presente se Tipologia di adempimento è uguale a 3, 4, 5, 6 o 7</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="DataFine" type="cm:DatoDN_Type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Nel caso di prima registrazione o se Tipologia di adempimento è uguale a 1 (Annualità successive) o 2 (Proroga) è obbligatorio in assenza di condizione sospensiva.
+Non deve essere presente se Tipologia di adempimento è uguale a 3, 4, 5, 6 o 7.
+Deve essere successiva alla data Inizio</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="ImportoCanone" type="cm:DatoVP_Type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Nel caso di prima registrazione o se Tipologia di adempimento è uguale a 1 (Annualità successive) o 2 (Proroga) è obbligatorio in assenza di casi particolari = 1.
+Non deve essere presente se Tipologia di adempimento è uguale a 3, 4, 5, 6 o 7.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="ContrattoTempoIndeterminato" type="cm:DatoCB_Type" minOccurs="0"/>
+								<xs:element name="ContrattoEsente" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>1=esente bollo, 2= esente bollo e registro, 3= esente registro</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="cm:DatoN1_Type">
+											<xs:enumeration value="1">
+												<xs:annotation>
+													<xs:documentation><![CDATA[esente bollo]]></xs:documentation>
+												</xs:annotation>
+											</xs:enumeration>
+											<xs:enumeration value="2">
+												<xs:annotation>
+													<xs:documentation><![CDATA[esente bollo e registro]]></xs:documentation>
+												</xs:annotation>
+											</xs:enumeration>
+											<xs:enumeration value="3">
+												<xs:annotation>
+													<xs:documentation><![CDATA[esente registro]]></xs:documentation>
+												</xs:annotation>
+											</xs:enumeration>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CondizioneSospensiva" type="cm:DatoCB_Type" minOccurs="0"/>
+								<xs:element name="ClausolaPenaleVolontaria" type="cm:DatoCB_Type" minOccurs="0"/>
+								<xs:element name="Garanzia" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Se nel contratto di locazione e' presente una garanzia prestata da terzi indicare i codici fiscali dei garanti (almeno uno).</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="TipologiaGaranzia">
+												<xs:annotation>
+													<xs:documentation>I codici ‘3’ e ‘4’ possono essere presenti solo se tipologia contratto è uguale a T1 o T2.
+Non deve essere presente se Tipologia di adempimento è uguale a 3, 4, 5, 6 o 7.</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="cm:DatoN1_Type">
+														<xs:enumeration value="1">
+															<xs:annotation>
+																<xs:documentation><![CDATA[fidejussione prestata da terzi]]></xs:documentation>
+															</xs:annotation>
+														</xs:enumeration>
+														<xs:enumeration value="2">
+															<xs:annotation>
+																<xs:documentation><![CDATA[garanzie di terzi diverse dalla fidejussione]]></xs:documentation>
+															</xs:annotation>
+														</xs:enumeration>
+														<xs:enumeration value="3">
+															<xs:annotation>
+																<xs:documentation><![CDATA[PAC]]></xs:documentation>
+															</xs:annotation>
+														</xs:enumeration>
+														<xs:enumeration value="4">
+															<xs:annotation>
+																<xs:documentation><![CDATA[PAC con garanzia]]></xs:documentation>
+															</xs:annotation>
+														</xs:enumeration>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="ImportoGaranziaPrestataDaTerzi" type="cm:DatoVP_Type">
+												<xs:annotation>
+													<xs:documentation>Dato obbligatorio in presenza del campo successivo.
+Non deve essere presente se Tipologia di adempimento è uguale a 3, 4, 5, 6 o 7.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="CodiceFiscaleGarante" type="cm:DatoCF_Type" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Nel caso di prima registrazione è obbligatorio in presenza del campo precedente. Deve essere diverso dai codici fiscali dei locatori e conduttori.
+Non deve essere presente nel caso di adempimenti successivi
+Non deve essere presente nel caso di tipologia di garanzia = 3</xs:documentation>
+									</xs:annotation>
+											</xs:element>
+											<xs:element name="CodiceFiscaleSecondoGarante" type="cm:DatoCF_Type" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Non puo' essere presente in assenza del campo precedente.
+Deve essere diverso dai codici fiscali dei locatori e conduttori e da quello del primo garante</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="GaranziaSoggettaIva" type="cm:DatoCB_Type" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Può essere presente solo in presenza del campo Importo Garanzia</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="PagamentoInteraDurataContratto" type="cm:DatoCB_Type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Nel caso di prima registrazione o se Tipologia di adempimento è uguale a 2 (Proroga) può essere presente solo per tipologia di contratto = L1, L2, L3, S1, S2, T1, T2, T3, T4  
+Nel caso di prima registrazione o se Tipologia di adempimento è uguale a 2 (Proroga) è obbligatorio per tipologia di contratto = T1, T2, T3, T4 e per la tipologia contratto L1, L2, L3, S1, S2  se la durata del contratto (data fine – data inizio) è minore o uguale a 365 giorni (in assenza di durata non è obbligatorio)
+Nel caso di prima registrazione o se Tipologia di adempimento è uguale a 2 (Proroga) è obbligatorio se casi particolari = 3 
+Nel caso di adempimenti successivi può essere presente solo se Tipologia di adempimento è uguale a 2
+Nel caso di prima registrazione o se Tipologia di adempimento è uguale a 2 (Proroga) non può essere presente se casi particolari = 1</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="EventiEccezionali" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>In presenza di “Eventi eccezionali” con codice 1 il calcolo di sanzioni ed interessi può essere modificato rispetto a quanto calcolato (non possono essere invece modificate le imposte di registro e di bollo)  
+In presenza di “Eventi eccezionali” con codice 2 il calcolo delle imposte può essere modificato in aumento rispetto a quanto calcolato, ad eccezione delle risoluzioni con pagamento contestuale del corrispettivo (in cui l'imposta può essere ridotta le imposte possono essere modificate anche in diminuzione)   </xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="cm:DatoN1_Type">
+											<xs:enumeration value="1">
+												<xs:annotation>
+													<xs:documentation><![CDATA[soggetti che, essendone legittimati, fruiscono delle agevolazioni fiscali previste da particolari disposizioni normative emanate a seguito di calamità naturali o di altri eventi eccezionali]]></xs:documentation>
+												</xs:annotation>
+											</xs:enumeration>
+											<xs:enumeration value="2">
+												<xs:annotation>
+													<xs:documentation><![CDATA[presenza di situazioni in cui il calcolo dell'imposta è diverso da quello previsto dalle specifiche tecniche]]></xs:documentation>
+												</xs:annotation>
+											</xs:enumeration>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CasiParticolari" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Il valore 3 può essere presente solo per tipologia di contratto = L1, L2, S1, S2
+Nel caso di adempimenti successivi il valore 3 può essere presente solo se Tipologia di adempimento è uguale a 2
+In presenza di “casi particolari” è obbligatoria l’allegazione del contratto.</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="cm:DatoN1_Type">
+											<xs:enumeration value="1">
+												<xs:annotation>
+													<xs:documentation><![CDATA[Presenza di un canone diverso per una o più annualità]]></xs:documentation>
+									</xs:annotation>
+											</xs:enumeration>
+											<xs:enumeration value="2">
+												<xs:annotation>
+													<xs:documentation><![CDATA[Sublocazione]]></xs:documentation>
+												</xs:annotation>
+											</xs:enumeration>
+											<xs:enumeration value="3">
+												<xs:annotation>
+													<xs:documentation><![CDATA[Canone diverso per una o più annualità – intera durata]]></xs:documentation>
+												</xs:annotation>
+											</xs:enumeration>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Importi" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Imposte" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Se e' presente la cedolare secca non saranno dovute imposte (bollo e registro), salvo il caso di garanzie di terzi diverse dalle fideiussioni (Importo Garanzia x 0,5% con minimo di euro 200,00).
+Nel caso in cui l’immobile sia posseduto da piu' soggetti, alcuni dei quali optino per la cedolare secca, coloro che non optano sono tenuti al pagamento: 
+• dell’imposta di registro, limitatamente alla frazione del canone loro imputabile in base alle quote complessive di possesso dell’immobile loro spettanti;    Nel caso in cui il contratto di locazione abbia ad oggetto anche immobili non soggetti alla cedolare, l’imposta deve essere determinata in proporzione alla rendita catastale attribuita.
+• dell’imposta di bollo, nella misura ordinaria
+In caso di contratto di locazione ad uso abitativo, registrato tardivamente,  in relazione al quale tutti i locatori abbiano optato per la cedolare secca,   saranno dovute solo le  sanzioni.</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="ImpostaDiRegistro" type="cm:DatoVP_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>tramite la tipologia di contratto si definisce l’aliquota da applicare al canone o l’imposta fissa. 
+o L’imposta di registro non puo' essere inferiore a 67,00 euro 
+o L'importo dell'imposta di registro e' arrotondato all'unita' di euro.
+o Se sono presenti data inizio e fine, determinare MESI = (Data fine - data inizio + 1) / 30,4375. Tale risultato e' arrotondato all'unita'.
+o Se non sono presenti data inizio o fine o se non e' impostato il campo pagamento intera durata o se MESI e' minore o uguale a 12 o tipologia di contratto = L3, T1, T2, T3, T4: l’imposta e' uguale a Aliquota Tabella x Importo canone (o imposta fissa);
+o Se sono presenti data inizio e fine e se e' impostato il campo pagamento intera durata e MESI > 12 e tipologia di contratto = L1, L2, S1, S2, si applica uno sconto che consiste in una detrazione dall’imposta dovuta, in misura percentuale, pari alla meta' del tasso di interesse legale:
+• IMPOSTA_REGISTRO = (Aliquota Tabella x Importo canone / 12 x MESI) 
+• ANNI = (Data fine - data inizio + 1) / 365.  Tale risultato e' arrotondato per difetto all'unita';
+• DETRAZIONE = IMPOSTA_REGISTRO * tasso di interesse legale in vigore all'atto della registrazione / 200 * ANNI
+• Dal 01/01/2014 al 31/12/2014 l'interesse legale e' pari al 1%; dal 01/01/2015 al 31/12/2015 l'interesse legale è pari allo 0.50%; dal 01/01/2016 l'interesse legale è pari allo 0.20%
+• Imposta dovuta = IMPOSTA_REGISTRO - DETRAZIONE
+o Se casi particolari = 3 e tipologia di contratto = L1, L2, S1, S2:
+    • IMPOSTA_REGISTRO = Aliquota Tabella x (Importo canone + somma canoni quadro E); 
+• ANNI = (Data fine - data inizio + 1) / 365.  Tale risultato e' arrotondato per difetto all'unita';
+• DETRAZIONE = IMPOSTA_REGISTRO * tasso di interesse legale in vigore all'atto della registrazione / 200 * ANNI 
+• Dal 01/01/2014 al 31/12/2014 l'interesse legale e' pari al 1%; dal 01/01/2015 al 31/12/2015 l'interesse legale è pari allo 0.50%; dal 01/01/2016 l'interesse legale è pari allo 0.20%
+• Imposta dovuta = IMPOSTA_REGISTRO - DETRAZIONE
+o Se casi particolari = 1 e importo canone =0, l’imposta di registro è uguale a 67,00
+o Se casi particolari = 1 ed è presente una garanzia, va aggiunto: Importo Garanzia x 0,5%, con minimo garanzia di 200 euro.
+• Se tipologia contratto = L1 o L2, non c'è cedolare ed è presente una garanzia e non è barrata la casella garanzia soggetta ad IVA, va aggiunto: Importo Garanzia x 0,5% con imposta di registro complessiva non inferiore ad euro 200,00.
+• Se tipologia contratto = L1 o L2, non c'è cedolare ed è presente una garanzia ed è barrata la casella garanzia soggetta ad IVA, va aggiunto: 200 euro. 
+• Se tipologia contratto = L1 o L2 ed è presente la cedolare secca (100%) ed è presente una garanzia con tipologia = 1 (fidejussione prestata da terzi), non è dovuta imposta indipendentemente dalla casella garanzia soggetta ad iva.
+• Se tipologia contratto = L1 o L2 ed è presente la cedolare secca (100%) ed è presente una garanzia con tipologia = 2 (garanzie di terzi diverse dalla fidejussione) e non è barrata la casella  garanzia soggetta ad IVA, è dovuta la sola imposta di registro sulla garanzia (Importo Garanzia x 0,5%) con minimo di 200 euro.
+• Se tipologia contratto = L1 o L2 ed è presente la cedolare secca (100%) ed è presente una garanzia con tipologia = 2 (garanzie di terzi diverse dalla fidejussione) ed è barrata la casella  garanzia soggetta ad IVA, l’imposta di registro è uguale a  200,00 Euro.
+• Se tipologia contratto = L1 o L2  ed è presente la cedolare secca (cedolare mista a registro) ed è presente una garanzia con tipologia = 1 (fidejussione prestata da terzi) e non è barrata la casella garanzia soggetta ad IVA, va aggiunto: Importo Garanzia x 0,5% (calcolata pro quota) con minimo garanzia di 200 euro.
+• Se tipologia contratto = L1 o L2 ed è presente la cedolare secca (cedolare mista a registro) ed è presente una garanzia con tipologia = 2 (garanzie di terzi diverse dalla fidejussione) e non è barrata la casella garanzia soggetta ad IVA, va aggiunto: Importo Garanzia x 0,5% (calcolata pro quota) con imposta di registro complessiva non inferiore ad euro 200,00
+• Se tipologia contratto = L1 o L2 ed è presente la cedolare secca (cedolare mista a registro) ed è presente una garanzia ed è barrata la casella garanzia soggetta ad IVA, va aggiunto: 200 euro.
+• Se tipologia contratto = S1 o S2 o T1 o T3 o T4, è presente una garanzia e non è barrata la casella garanzia soggetta ad IVA, va aggiunto: Importo Garanzia x 0,5%, con imposta di registro complessiva non inferiore ad euro 200,00.
+• Se tipologia contratto = S1 o S2 o T1 o T3, è presente una garanzia ed è barrata la casella garanzia soggetta ad IVA, va aggiunto: 200 euro.
+• Se tipologia di contratto = L3 o L4 o S3 o T2 è presente una garanzia e non è barrata la casella garanzia soggetta ad IVA, va aggiunto: Importo Garanzia x 0,5% con minimo garanzia di 200 euro.
+• Se tipologia di contratto = L3 o T2 o T4 è presente una garanzia ed è barrata la casella garanzia soggetta ad IVA, l’imposta di registro è uguale a  267,00 Euro.
+• Se tipologia contratto= L4 o S3 è presente una garanzia ed è barrata la casella garanzia soggetta ad IVA, l’imposta di registro è uguale a  400,00 Euro.
+o Se casi particolari = 1 ed è presente una garanzia, va aggiunto: Importo Garanzia x 0,5%, con minimo garanzia di 200 euro.
+o Se è presente la condizione sospensiva  si applica in ogni caso 200,00 Euro.
+o Se è presente la clausola penale volontaria si aggiungono 200,00 Euro 
+o Nel caso di contratto esente bollo e registro o esente registro non si applica l’imposta.
+Se Tipologia di adempimento è uguale a 1 (Annualità successive) il calcolo è uguale a quello della prima registrazione (ad eccezione dell’intera durata che non è ammessa). Non si applica il limite minimo dei 67 euro.
+Se Tipologia di adempimento è uguale a 2 (Proroga)  il calcolo è uguale a quello della prima registrazione. Si applica il limite minimo dei 67 euro, tranne ai contratti a tempo indeterminato per i quali la relativa proroga va inviata entro 20gg dal termine di scadenza.
+Se Tipologia di adempimento è uguale a 3 (Cessione)  e se è presente un corrispettivo, l’imposta è uguale al 2% del corrispettivo in presenza di tipologia contratto = L1, L2, L3, S1 e T3; per T1, T2 e T4 si applica lo 0,50%; per S2 si applica l' 1%; non può essere inferiore a 67 euro.
+Se Tipologia di adempimento è uguale a 3 (Cessione) e se è presente un corrispettivo e tipologia contratto = L4 o S3, l’imposta è uguale al 3% del corrispettivo; non può essere inferiore a 200 euro.
+Se Tipologia di adempimento è uguale a 4 (Risoluzione) e se è presente un corrispettivo, l’imposta è uguale al 3% del corrispettivo; non può essere inferiore a 67 euro.
+Se Tipologia di adempimento è uguale a 4 (Risoluzione) e se è presente la cedolare al 100%, l’imposta è uguale a zero.
+Se Tipologia di adempimento è uguale a 5 (Conguaglio d’imposta) deve essere presente.
+Se Tipologia di adempimento è uguale a 6 (Subentro) non può essere presente.
+Se Tipologia di adempimento è uguale a 7 (Risoluzione con pagamento contestuale del corrispettivo) l’imposta è uguale allo 0,50% del corrispettivo; non può essere inferiore a 67 euro.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="ImpostaDiBollo" type="cm:DatoVP_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Determinare FOGLI = NumeroPagine / 4 arrotondato all'unita' superiore. 
+L'imposta deve essere uguale a 16 * FOGLI * NumeroCopie. 
+Nel caso di tipologia di contratto = L4 o S3, l’imposta di bollo (sul contratto) e' pari a euro 16, indipendentemente dal numero di esemplari e copie.
+Nel caso di tipologia di contratto = T1 o T2 non è dovuta imposta di bollo (sul contratto).
+In presenza di allegati al contratto aggiungere l’imposta sugli allegati,  con aliquota diversa a seconda della tipologia di allegato:
+o Scritture private, inventari: 16 x ogni foglio * Numero Copie. 
+o Ricevute e quietanze: 2 per esemplare * Numero Copie. 
+o Mappe, planimetrie e disegni: 1,00 per ogni foglio o esemplare * Numero Copie.  
+L'importo dell'imposta di bollo e' arrotondato ai centesimi di euro.
+Nel caso di contratto esente bollo o esente bollo e registro non si applica l’imposta.
+Nel caso di adempimenti successivi non può essere presente</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Sanzioni" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Nel caso di prima registrazione per i contratti di durata non superiore a trenta giorni (se differenza tra data fine e data inizio è minore o uguale a 30) o se tipologia di contratto = L4, S3 o T2 non devono essere presenti sanzioni ed interessi. Tardività prima registrazione
+• Se la data di stipula è antecedente o uguale alla data di inizio del contratto (o in assenza della data di inizio), calcolare il numero di giorni che intercorrono tra il giorno successivo a quello di stipula e la data di trasmissione telematica della richiesta; 
+•  Se la data di stipula è successiva alla data di inizio del contratto, calcolare il numero di giorni che intercorrono tra il giorno successivo a quello di inizio del contratto e la data di trasmissione telematica della richiesta; 
+Se il numero di giorni è superiore a 30  sarà necessario inserire le sanzioni e gli interessi
+Tardività adempimenti successivi
+• Per il pagamento annualità successiva la data di riferimento è composta dal giorno e mese della data di fine contratto e dall’annualità indicata nella sezione II del modello RLI
+• Per la proroga la data di riferimento è la data di fine contratto
+• Per la cessione la data di riferimento è la data di cessione indicata nella sezione II del modello RLI
+• Per la risoluzione la data di riferimento è la data di risoluzione indicata nella sezione II del modello RLI
+Calcolare il numero di giorni che intercorrono tra il giorno successivo a quello della data di riferimento e la data di trasmissione telematica della richiesta;
+se il numero di giorni è superiore a 30 sarà necessario inserire le sanzioni e gli interessi.
+In caso di proroga relativa a contratti a tempo indeterminato il termine è di 20 giorni.   
+L'importo delle sanzioni ed interessi e' arrotondato al centesimo di euro. </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="ImpostaDiRegistro" type="cm:DatoVP_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Nel caso di prima registrazione se il pagamento è effettuato entro 30 gg dalla scadenza le sanzioni sono pari al 6 % dell’imposta di registro dovuta (riduzione della sanzione a 1/10 pari al 120%) con un minimo di 20 euro.
+Nel caso di prima registrazione se il pagamento è effettuato entro 90 gg dalla scadenza le sanzioni sono pari al 12 % dell’imposta di registro dovuta (riduzione della sanzione a 1/10 pari al 120%).
+Nel caso di prima registrazione se il pagamento è effettuato entro 1 anno dalla scadenza  le sanzioni sono pari al 15 % dell’imposta di registro dovuta (riduzione della sanzione a 1/8 pari al 120%).
+Nel caso di prima registrazione se il pagamento è effettuato oltre 1 anno ed entro il 2° anno dalla scadenza le sanzioni sono pari al 17,14 % dell’imposta di registro dovuta (riduzione della sanzione a 1/7 pari al 120%).
+Nel caso di prima registrazione se il pagamento è effettuato oltre 2 anni dalla scadenza le sanzioni sono pari al 20 % dell’imposta di registro dovuta (riduzione della sanzione a 1/6  pari al 120%).
+Nel caso di adempimenti successivi se il pagamento è effettuato entro 15 gg dalla scadenza le sanzioni sono pari allo 0.1 % dell’imposta di registro dovuta per ogni giorno di ritardo (riduzione della sanzione a 1/10)
+Nel caso di adempimenti successivi se il pagamento è effettuato entro 30 gg dalla scadenza le sanzioni sono pari al 1.5  % dell’imposta di registro dovuta (riduzione della sanzione a 1/10)
+Nel caso di adempimenti successivi se il pagamento è effettuato entro 90 gg dalla scadenza le sanzioni sono pari al 1.6  % dell’imposta di registro dovuta (riduzione della sanzione a 1/9)
+Nel caso di adempimenti successivi se il pagamento è effettuato entro 1 anno dalla scadenza le sanzioni sono pari al 3.75  % dell’imposta di registro dovuta (riduzione della sanzione a 1/8)
+Nel caso di adempimenti successivi se il pagamento è effettuato oltre 1 anno ed entro il 2° anno dalla scadenza le sanzioni sono pari al 4,28 % dell’imposta di registro dovuta (riduzione della sanzione a 1/7)
+Nel caso di adempimenti successivi se il pagamento è effettuato oltre 2 anni dalla scadenza le sanzioni sono pari al 5 % dell’imposta di registro dovuta (riduzione della sanzione a 1/6)
+In presenza di cedolare secca è prevista una sanzione in misura fissa per risoluzioni comunicate  tardivamente: 35 euro (tardività entro 30 gg) o 67 euro.
+Se Tipologia di adempimento è uguale a 6 (Subentro) non può essere presente. </xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="ImpostaDiBollo" type="cm:DatoVP_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Nel caso di prima registrazione se il pagamento è effettuato entro 30 gg dalla scadenza le sanzioni sono pari al 10 % dell’imposta di bollo dovuta (riduzione della sanzione a 1/10)
+Nel caso di prima registrazione se il pagamento è effettuato entro 90 gg dalla scadenza le sanzioni sono pari al 11,11 % dell’imposta di bollo dovuta (riduzione della sanzione a 1/9)
+Nel caso di prima registrazione se il pagamento è effettuato entro 1 anno dalla scadenza le sanzioni sono pari al 12.5 % dell’imposta di bollo dovuta (riduzione della sanzione a 1/8)
+Nel caso di prima registrazione se il pagamento è effettuato oltre 1 anno ed entro il 2° anno dalla scadenza le sanzioni sono pari al 14,28 % dell’imposta di bollo dovuta (riduzione della sanzione a 1/7)
+Nel caso di prima registrazione se il pagamento è effettuato oltre 2 anni dalla scadenza le sanzioni sono pari al 16,66 % dell’imposta di bollo dovuta (riduzione della sanzione a 1/6)
+Nel caso di adempimenti successivi non può essere presente</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Interessi" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="ImpostaDiRegistro" type="cm:DatoVP_Type" minOccurs="0">
+												<xs:annotation>
+																<xs:documentation>Nel caso di prima registrazione per i contratti di durata non superiore a trenta giorni (se differenza tra data fine e data inizio  è minore o uguale a 30) o se tipologia di contratto = L4, S3 o T2 non devono essere presenti sanzioni ed interessi.
+Sono calcolati giornalmente al tasso legale annuo.
+o Dal 01/01/2008 al 31/12/2009 l'interesse legale è pari al 3 %: 3 % / 365 = 0.0082192 % per ogni giorno di ritardo;   
+o Dal 01/01/2010 al 31/12/2010 l'interesse legale è pari al 1 %: 1 % / 365 = 0.0027397 % per ogni giorno di ritardo;  
+o Dal 01/01/2011 al 31/12/2011 l'interesse legale è pari al 1.50 %: 1.50 % / 365 = 0.0041096 % per ogni giorno di ritardo; 
+o Dal 01/01/2012 al 31/12/2013 l'interesse legale è pari al 2.50 %: 2.50 % / 365 = 0.0068493 % per ogni giorno di ritardo; 
+o Dal 01/01/2014 al 31/12/2014 l'interesse legale è pari al 1 %: 1 % / 365 = 0.0027397 % per ogni giorno di ritardo; 
+o Dal 01/01/2015  al 31/12/2015 l'interesse legale è pari allo 0,50 %: 0.50 % / 365 = 0.0013699 % per ogni giorno di ritardo;
+o Dal 01/01/2016 l'interesse legale è pari allo 0,20 %: 0.20 % / 365 = 0.0005479 % per ogni giorno di ritardo;
+In presenza di cedolare secca non sono previsti interessi per risoluzioni comunicate  tardivamente.
+Se Tipologia di adempimento è uguale a 6 (Subentro) non può essere presente.      </xs:documentation>
+												</xs:annotation>
+														</xs:element>
+														<xs:element name="ImpostaDiBollo" type="cm:DatoVP_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Nel caso di prima registrazione per i contratti di durata non superiore a trenta giorni (se differenza tra data fine e data inizio  è minore o uguale a 30) o se tipologia di contratto = L4, S3 o T2 non devono essere presenti sanzioni ed interessi.
+Sono calcolati giornalmente al tasso legale annuo.
+o Dal 01/01/2008 al 31/12/2009 l'interesse legale è pari al 3 %: 3 % / 365 = 0.0082192 % per ogni giorno di ritardo;   
+o Dal 01/01/2010 al 31/12/2010 l'interesse legale è pari al 1 %: 1 % / 365 = 0.0027397 % per ogni giorno di ritardo;  
+o Dal 01/01/2011 al 31/12/2011 l'interesse legale è pari al 1.50 %: 1.50 % / 365 = 0.0041096 % per ogni giorno di ritardo; 
+o Dal 01/01/2012 al 31/12/2013 l'interesse legale è pari al 2.50 %: 2.50 % / 365 = 0.0068493 % per ogni giorno di ritardo; 
+o Dal 01/01/2014 al 31/12/2014 l'interesse legale è pari al 1 %: 1 % / 365 = 0.0027397 % per ogni giorno di ritardo; 
+o Dal 01/01/2015  al 31/12/2015 l'interesse legale è pari allo 0,50 %: 0.50 % / 365 = 0.0013699 % per ogni giorno di ritardo;
+o Dal 01/01/2016 l'interesse legale è pari allo 0,20 %: 0.20 % / 365 = 0.0005479 % per ogni giorno di ritardo;
+Nel caso di adempimenti successivi non può essere presente</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:choice>
+									<xs:element name="Registrazione">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Contratto">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="DataStipula" type="cm:DatoDT_Type">
+																<xs:annotation>
+																	<xs:documentation>a) La data di stipula non puo' essere successiva a quella di trasmissione Telematica della richiesta (tale controllo sara' effettuato sia in fase di accoglienza che di compilazione/controllo)
+b) Se la data di stipula e' antecedente o uguale alla data di inizio del contratto (o in assenza della data di inizio), calcolare il numero di giorni che intercorrono tra il giorno successivo a quello di stipula e la data di trasmissione telematica della richiesta; 
+c) Se la data di stipula e' successiva alla data di inizio del contratto, calcolare il numero di giorni che intercorrono tra il giorno successivo a quello di inizio del contratto e la data di trasmissione telematica della richiesta; 
+se il numero di giorni e' superiore a 30  sara' necessario inserire le sanzioni e gli interessi (tale controllo sara' effettuato solo in fase di accoglienza)
+d) Per i contratti di durata non superiore a trenta giorni (se differenza tra data fine e data inizio  e' minore o uguale a 30) e per le tipologie L4 e S3, non devono essere inserite le sanzioni e gli interessi, in quanto tali contratti sono soggetti a registrazione in caso d’uso.</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="NumeroPagine">
+																<xs:simpleType>
+																	<xs:restriction base="cm:DatoNU_Type">
+																		<xs:maxLength value="3"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="NumeroCopie">
+																<xs:annotation>
+																	<xs:documentation>Indicare il numero di esemplari cartacei del contratto sottoscritti dalle parti (minimo uno).</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="cm:DatoNU_Type">
+																		<xs:maxLength value="3"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="ContrattoSoggettoIVA" type="cm:DatoCB_Type" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>In presenza dei codici L3 e T4 la casella dovra' essere barrata in via obbligatoria e dovra' essere presente almeno un locatore soggetto IVA.
+In presenza dei restanti codici la casella potra' essere barrata in via facoltativa; tuttavia nel caso venga barrata almeno un locatore dovra' essere “soggetto IVA”.</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="NumeroAllegatoA" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Numero fogli o esemplari di  scritture private, inventari (allegati al contratto)</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="cm:DatoNU_Type">
+																		<xs:maxLength value="3"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="NumeroAllegatoB" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Numero fogli o esemplari di  ricevute e quietanze (allegati al contratto)</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="cm:DatoNU_Type">
+																		<xs:maxLength value="3"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="NumeroAllegatoC" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Numero fogli o esemplari di  mappe, planimetrie e disegni (allegati al contratto)</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="cm:DatoNU_Type">
+																		<xs:maxLength value="3"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Allegati" type="reg:FileAttachment_Type" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>deve essere allegato il contratto da registrare.
+In presenza di “casi particolari” o di contratto a tempo indeterminato è obbligatoria l’allegazione del contratto.
+L’allegazione è facoltativa in presenza contemporanea dei seguenti requisiti:
+- Tipologia contratto: L1 o L2
+- Contratto non soggetto a Iva;
+- Assenza di allegati (Mappe, planimetrie, disegni, ecc….).
+- massimo 3 Locatori persone fisiche e soggettività Iva non barrata
+- massimo 3 Conduttori persone fisiche e soggettività Iva non barrata
+- deve essere presente un immobile con codice 1 (immobile principale). 
+- Gli altri immobili (max 3) devono avere codice 2 (pertinenza locata congiuntamente).
+- Tipologia immobile: U = urbano.
+- Rendita catastale presente.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="ContrattoNonAllegato" type="cm:DatoCB_Type" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Obbligatorio in caso di allegazione facoltativa ed in assenza di allegato.
+Non può essere presente in presenza di allegato</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="AdempSucc">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="TipologiaAdempimento">
+													<xs:simpleType>
+														<xs:restriction base="cm:DatoN1_Type">
+															<xs:enumeration value="1">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Annualità successive]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="2">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Proroga]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="3">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Cessione]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="4">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Risoluzione]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="5">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Conguaglio d’imposta]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="6">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Subentro]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="7">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Risoluzione con pagamento contestuale del corrispettivo]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="CedolareSecca" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Può essere presente solo se Tipologia di adempimento è uguale a 1 o 2 o 3 o 4 o 6 o 7.
+Non può essere presente se Tipologia di adempimento è uguale a 5.
+Obbligatorio per tipologia contratto = L1 o L2 o S1.
+Non può essere presente per le altre tipologie di contratto.
+Se tipologia contratto = S1 la cedolare deve essere = 3 .
+Non può essere presente in presenza di soggetto subentrato.
+Non può essere presente se casi particolari = 2.</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="cm:DatoN1_Type">
+															<xs:enumeration value="1">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[tutti i locatori optano per la cedolare (cedolare 100%)]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="2">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[almeno un locatore non opta per la cedolare (cedolare mista)]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="3">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[nessun locatore opta per la cedolare (cedolare = 0)]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="CDC" type="cm:DatoCB_Type" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Può essere presente solo se i dati catastali non erano precedentemente comunicati per lo specifico contratto; la non corrispondenza comporta lo scarto della richiesta in fase di accettazione.
+Non può essere presente se Tipologia di adempimento è uguale a  5.  </xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="Annualita" type="cm:DatoDA_Type" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Obbligatorio se Tipologia di adempimento è uguale a 1 o 5.
+Non può essere presente se Tipologia di adempimento è uguale a 2 o 3 o 4 o 6 o 7</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="DataFine" type="cm:DatoDN_Type" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Obbligatorio se Tipologia di adempimento è uguale a 2 o 3 o 4 o 6 o 7.
+Non può essere presente se Tipologia di adempimento è uguale a 1 o 5.
+Se Tipologia di adempimento è uguale a 2 deve essere successiva alla data di scadenza del contratto; la non corrispondenza comporta lo scarto della richiesta in fase di accettazione.
+Se Tipologia di adempimento è uguale a 3 o 6 deve essere successiva alla data di stipula o decorrenza del contratto; la non corrispondenza comporta lo scarto della richiesta in fase di accettazione.
+Se Tipologia di adempimento  è uguale a 4 o 7 deve essere successiva alla data di stipula, di decorrenza o registrazione del contratto; la non corrispondenza comporta lo scarto della richiesta in fase di accettazione.  </xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="Corrispettivo" type="cm:DatoVP_Type" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Non può essere presente se Tipologia di adempimento è uguale a 1 o 2 o 5 o 6.
+Se Tipologia di adempimento  è uguale a 7 il campo è obbligatorio </xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:choice>
+													<xs:annotation>
+														<xs:documentation>Gli estremi di registrazione o l' ID telematico devono coincidere con quelli di un contratto precedentemente registrato.
+L'ufficio di registrazione (o i primi 3 bytes dell' ID telematico) deve essere uguale per tutti gli adempimenti successivi presenti nella fornitura.
+La non corrispondenza comporta lo scarto della richiesta in fase di accettazione.</xs:documentation>
+													</xs:annotation>
+													<xs:element name="Registrazione">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="UfficioDiRegistrazione" type="reg:UfficioDiRegistrazione_Type"/>
+																<xs:element name="Anno" type="cm:DatoDA_Type"/>
+																<xs:element name="Serie">
+																	<xs:annotation>
+																		<xs:documentation>Può essere numerica (un solo carattere da 1 a 4) o alfa numerica (2 caratteri: il primo da 1 a 4 ed il secondo una lettera). </xs:documentation>
+																	</xs:annotation>
+																	<xs:simpleType>
+																		<xs:restriction base="reg:Serie_Type">
+																			<xs:maxLength value="2"/>
+																			<xs:minLength value="1"/>
+																			<xs:enumeration value="3"/>
+																			<xs:enumeration value="3A"/>
+																			<xs:enumeration value="3B"/>
+																			<xs:enumeration value="3C"/>
+																			<xs:enumeration value="3P"/>
+																			<xs:enumeration value="3T"/>
+																			<xs:enumeration value="3V"/>
+																			<xs:enumeration value="1"/>
+																			<xs:enumeration value="1A"/>
+																			<xs:enumeration value="1B"/>
+																			<xs:enumeration value="1C"/>
+																			<xs:enumeration value="1D"/>
+																			<xs:enumeration value="1V"/>
+																			<xs:enumeration value="2"/>
+																			<xs:enumeration value="2A"/>
+																			<xs:enumeration value="2B"/>
+																			<xs:enumeration value="2C"/>
+																			<xs:enumeration value="2V"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="NumeroRegistrazione">
+																	<xs:simpleType>
+																		<xs:restriction base="cm:DatoNU_Type">
+																			<xs:maxLength value="6"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="SottonumeroRegistrazione" minOccurs="0">
+																	<xs:simpleType>
+																		<xs:restriction base="cm:DatoNU_Type">
+																			<xs:maxLength value="3"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="IDTelematico">
+														<xs:simpleType>
+															<xs:restriction base="cm:DatoAN_Type">
+																<xs:length value="17"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+												</xs:choice>
+												<xs:element name="Progressivo" minOccurs="0">
+													<xs:simpleType>
+														<xs:restriction base="cm:DatoNU_Type">
+															<xs:maxLength value="3"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="TipologiaSubentro" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Obbligatorio se Tipologia di adempimento è uguale a 6.
+Non può essere presente se Tipologia di adempimento è diversa da 6.</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="cm:DatoN1_Type">
+															<xs:enumeration value="1">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Decesso]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="2">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Trasferimento immobiliare]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="3">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Trasformazione]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="4">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Fusione]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="5">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Scissione]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="6">
+																<xs:annotation>
+																	<xs:documentation><![CDATA[Altro]]></xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:choice>
+								<xs:element name="ImpegnoATrasmettere" type="reg:ImpegnoATrasmettere_Type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>La sezione è obbligatoria se il TipoFornitore è impostato con il valore 10.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="DataInvio" type="cm:DatoDN_Type">
+									<xs:annotation>
+										<xs:documentation>La data di invio indicata non può essere precedente a quella di sistema e la differenza tra queste due date non può essere superiore a 10 giorni (tale controllo sarà effettuato in fase di compilazione/controllo).
+La data di invio indicata non può essere precedente a quella di effettiva trasmissione Telematica della richiesta (tale controllo sarà effettuato in fase di accoglienza)
+</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Soggetti" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Se si tratta di prima registrazione il quadro è obbligatorio.
+Nel caso di adempimenti successivi il quadro è obbligatorio se Tipologia di adempimento è uguale a 3 o 6 o se è presente il campo CedolareSecca o se è presente il campo Soggetto subentrato; non può essere presente negli altri casi.
+I codici fiscali dei locatori e dei conduttori devono essere tutti diversi tra loro</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="PrimoModulo">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Locatore" type="loc:Soggetto_Type" minOccurs="0" maxOccurs="4">
+												<xs:annotation>
+													<xs:documentation>Se si tratta di prima registrazione la sezione è obbligatoria.
+Nel caso di adempimenti successivi se Tipologia di adempimento è uguale a 3 o 6 deve essere presente almeno una delle sezioni Locatore o Conduttore con almeno un cedente ed almeno un cessionario nello stesso ruolo.
+Nel caso di adempimenti successivi se è presente  il campo Soggetto subentrato deve essere presente solo un soggetto in una delle sezioni Locatore o Conduttore.
+Nel caso di adempimenti successivi se  è presente il campo Cedolare Secca è obbligatoria la sezione Locatore (con la presenza di tutti i locatori del contratto)
+Nel caso di adempimenti successivi se Tipologia di adempimento è uguale a 3 o 6 il cedente deve essere parte del contratto precedentemente registrato; la non corrispondenza comporta lo scarto della richiesta in fase di accettazione.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Conduttore" type="loc:Soggetto_Type" minOccurs="0" maxOccurs="4">
+												<xs:annotation>
+													<xs:documentation>Se si tratta di prima registrazione la sezione è obbligatoria.
+Nel caso di adempimenti successivi se Tipologia di adempimento è uguale a 3 o 6  deve essere presente almeno una delle sezioni Locatore o Conduttore con almeno un cedente ed almeno un cessionario nello stesso ruolo.
+Nel caso di adempimenti successivi se è presente  il campo Soggetto subentrato deve essere presente solo un soggetto in una delle sezioni Locatore o Conduttore.
+Nel caso di adempimenti successivi se  è presente il campo Cedolare Secca e Tipologia di adempimento non è uguale a 3 non deve essere presente la sezione Conduttore.
+Nel caso di adempimenti successivi se Tipologia di adempimento è uguale a 3 o 6 il cedente deve essere parte del contratto precedentemente registrato; la non corrispondenza comporta lo scarto della richiesta in fase di accettazione.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Modulo" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Locatore" type="loc:Soggetto_Type" minOccurs="0" maxOccurs="4">
+												<xs:annotation>
+													<xs:documentation>Nel caso di adempimenti successivi se Tipologia di adempimento è uguale a 3 il cedente deve essere parte del contratto precedentemente registrato; la non corrispondenza comporta lo scarto della richiesta in fase di accettazione.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Conduttore" type="loc:Soggetto_Type" minOccurs="0" maxOccurs="4">
+												<xs:annotation>
+													<xs:documentation>Nel caso di adempimenti successivi se Tipologia di adempimento è uguale a 3 il cedente deve essere parte del contratto precedentemente registrato; la non corrispondenza comporta lo scarto della richiesta in fase di accettazione.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Immobili" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Se si tratta di prima registrazione il quadro è obbligatorio.
+Nel caso di adempimenti successivi il quadro è obbligatorio se è presente il campo CDC o se è presente la cedolare secca sul frontespizio; non può essere presente negli altri casi.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="PrimoModulo">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Immobile" maxOccurs="4">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="NumeroProgressivoImmobile">
+															<xs:annotation>
+																<xs:documentation>Se il numero degli immobili e' maggiore dei righi presenti nel modulo dovranno essere utilizzati piu' moduli avendo cura di far proseguire la numerazione “NUMERO IMMOBILE” in maniera progressiva (ad esempio 05, 06, 07, ecc.).</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:pattern value="[0-9]{3}"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="TipologiaImmobile" type="reg:TipologiaImmobile_Type">
+															<xs:annotation>
+																<xs:documentation>Assume i seguenti valori:
+1 = Immobile principale
+2 = Pertinenza locata congiuntamente all' immobile principale
+3 = Pertinenza locata disgiuntamente all' immobile principale
+4 = Pertinenza concessa con atto separato rispetto all' immobile principale per il quale si è optato per il regime di cedolare secca
+• Se e' presente un rigo con valore 2, dovra' essere presente in uno dei righi precedenti un immobile con valore 1 e dovra' essere preceduto da un rigo con valore 1 o 2. 
+•  Se e' presente un rigo con valore 3 non possono essere presenti altri immobili con tipologia diversa da 3 
+• Se è presente un rigo con valore 4, la tipologia contratto deve essere L1 o L2 e non possono essere presenti altri immobili con tipologia diversa da 4.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="CodiceComuneCatastale" type="reg:CodiceComuneCatastale_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se provincia e' diversa da "EE".
+Attenzione non e' il codice catastale ma un codice autonomamente attribuito dall'Agenzia del territorio. I primi quattro caratteri fanno riferimento ai codici catastali. Pertanto i primi 4 caratteri devono fare riferimento ad un codice catastale esistente.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="TipoCatasto" type="reg:TipoCatasto_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se provincia e' diversa da "EE".
+T/U (Terreni/Urbano)  	Se tipologia contratto = T1 o T2 e provincia e' diversa da "EE"  e Tipologia Immobile = 1,  tipo catasto deve essere = T.
+Se tipologia contratto = da L3 A L4, e da S1 a S3 e provincia e' diversa da "EE"  e Tipologia Immobile = 1 ,  tipo catasto deve essere = U.
+Se tipologia contratto = L1 o L2 e provincia è diversa da EE,  tipo catasto deve essere = U</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="PorzioneImmobile" type="reg:PorzioneImmobile_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se provincia e' diversa da "EE".
+I/P (Intero/Porzione)</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="SezioneUrbana" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Per gli immobili siti nelle sole zone in cui vige il sistema tavolare indicare il codice “Comune catastale” presente nel documento catastale.</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="cm:DatoAN_Type">
+																	<xs:maxLength value="3"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:choice>
+															<xs:element name="DatiCatastali" type="reg:DatiCatastaliTavolare_Type" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Dato obbligatorio se provincia e' diversa da "EE"e in assenza di InViaDiAccatastamento</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="InViaDiAccatastamento" type="cm:DatoCB_Type" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Dato obbligatorio se provincia e' diversa da "EE"e in assenza di DatiCatastali</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:choice>
+														<xs:element name="Comune">
+															<xs:annotation>
+																<xs:documentation>Nel caso di immobili situati all'estero indicare lo Stato estero</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="cm:DatoAN_Type">
+																	<xs:maxLength value="40"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Provincia" type="cm:PE_Type">
+															<xs:annotation>
+																<xs:documentation>Nel caso di immobili situati all'estero indicare EE</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="CategoriaCatastale" type="reg:CodiciCategoriaCatastale_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se Tipo catasto: “U”
+Assume i valori dei gruppi da A a F
+Se tipologia contratto = L1 o L2 e tipo Immobile: “1”, la categoria catastale deve essere “A”, escluso A10 oppure B1.
+Se tipologia contratto = L3 o L4 e tipo Immobile: “1”, la categoria catastale deve essere “A”, escluso A10
+Se tipologia contratto = S2 o S3, la categoria catastale deve essere diversa da A escluso A10 in almeno un immobile.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="RenditaCatastale" type="cm:DatoVP_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio  se Tipo catasto = U e se provincia e' diversa da "EE" ed in assenza del campo  InViaDiAccatastamento e se Categoria catastale diverso da F.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="TipologiaIndirizzo" type="reg:TipologiaIndirizzo_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se Tipo catasto = U</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Indirizzo" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se Tipo catasto = U</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="cm:DatoAN_Type">
+																	<xs:maxLength value="35"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="NumCivico" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="cm:DatoAN_Type">
+																	<xs:maxLength value="10"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Modulo" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Immobile" maxOccurs="4">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="NumeroProgressivoImmobile">
+															<xs:annotation>
+																<xs:documentation>Se il numero degli immobili e' maggiore dei righi presenti nel modulo dovranno essere utilizzati piu' moduli avendo cura di far proseguire la numerazione “NUMERO IMMOBILE” in maniera progressiva (ad esempio 05, 06, 07, ecc.).</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:pattern value="[0-9]{3}"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="TipologiaImmobile" type="reg:TipologiaImmobile_Type">
+															<xs:annotation>
+																<xs:documentation>Assume i seguenti valori:
+1 = Immobile principale
+2 = Pertinenza locata congiuntamente all' immobile principale
+3 = Pertinenza locata disgiuntamente all' immobile principale
+• Se e' presente un rigo con valore 2, dovra' essere presente in uno dei righi precedenti un immobile con valore 1 e dovra' essere preceduto da un rigo con valore 1 o 2. 
+•  Se e' presente un rigo con valore 3, non e' necessario che sia presente un rigo con valore 1. </xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="CodiceComuneCatastale" type="reg:CodiceComuneCatastale_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se provincia e' diversa da "EE".
+Attenzione non e' il codice catastale ma un codice autonomamente attribuito dall'Agenzia del territorio. I primi quattro caratteri fanno riferimento ai codici catastali. Pertanto i primi 4 caratteri devono fare riferimento ad un codice catastale esistente.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="TipoCatasto" type="reg:TipoCatasto_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se provincia e' diversa da "EE".
+T/U (Terreni/Urbano)  	Se tipologia contratto = T1 o T2 e provincia e' diversa da "EE"  e Tipologia Immobile = 1,  tipo catasto deve essere = T.
+Se tipologia contratto = da L3 A L4, e da S1 a S3 e provincia e' diversa da "EE"  e Tipologia Immobile = 1 ,  tipo catasto deve essere = U.
+Se tipologia contratto = L1 o L2 e provincia è diversa da EE,  tipo catasto deve essere = U</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="PorzioneImmobile" type="reg:PorzioneImmobile_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se provincia e' diversa da "EE".
+I/P (Intero/Porzione)</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="SezioneUrbana" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Per gli immobili siti nelle sole zone in cui vige il sistema tavolare indicare il codice “Comune catastale” presente nel documento catastale.</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="cm:DatoAN_Type">
+																	<xs:maxLength value="3"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:choice>
+															<xs:element name="DatiCatastali" type="reg:DatiCatastaliTavolare_Type" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Dato obbligatorio se provincia e' diversa da "EE"e in assenza di InViaDiAccatastamento</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="InViaDiAccatastamento" type="cm:DatoCB_Type" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Dato obbligatorio se provincia e' diversa da "EE"e in assenza di DatiCatastali</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:choice>
+														<xs:element name="Comune">
+															<xs:annotation>
+																<xs:documentation>Nel caso di immobili situati all'estero indicare lo Stato estero</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="cm:DatoAN_Type">
+																	<xs:maxLength value="40"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Provincia" type="cm:PE_Type">
+															<xs:annotation>
+																<xs:documentation>Nel caso di immobili situati all'estero indicare EE</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="CategoriaCatastale" type="reg:CodiciCategoriaCatastale_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se Tipo catasto: “U”
+Assume i valori dei gruppi da A a F
+Se Tipologia locazione: “L” e tipo Immobile: “1”, la categoria catastale deve essere “A”, escluso A10.
+Se tipologia contratto = S3, categoria catastale deve essere diversa da A escluso A10.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="RenditaCatastale" type="cm:DatoVP_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se Tipo catasto = U e se provincia e' diversa da "EE" ed in assenza del campo  InViaDiAccatastamento e se Categoria catastale diverso da F.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="TipologiaIndirizzo" type="reg:TipologiaIndirizzo_Type" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se Tipo catasto = U</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Indirizzo" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Dato obbligatorio se Tipo catasto = U</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="cm:DatoAN_Type">
+																	<xs:maxLength value="35"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="NumCivico" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="cm:DatoAN_Type">
+																	<xs:maxLength value="10"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Relazioni" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>questo quadro va compilato solo per  tipologia contratto = L1 o L2 o S1
+Il quadro non può essere presente se casi particolari = 2 
+Se si tratta di prima registrazione il quadro è obbligatorio  se tipologia contratto = L1 o L2 o S1 e non sia stata barrata la casella “soggettività IVA” nella sezione dedicata ai locatori  (per tutti i locatori).
+Nel caso di adempimenti successivi il quadro è obbligatorio se è presente il campo CedolareSecca sul frontespizio; non può essere presente negli altri casi.
+Se sono presenti immobili con tipologia = 3 la cedolare deve essere = N su tutti i righi. 
+Se sono presenti immobili con tipologia = 4 la cedolare deve essere = S su tutti i righi. 
+Se sono presenti immobili con categoria catastale = B1 la cedolare deve essere = N sui righi corrispondenti. 
+Se è presente almeno un conduttore con codice fiscale numerico e tipologia soggetto uguale a 3 la cedolare deve essere = N su tutti i righi. 
+Se tipologia contratto = S1 la cedolare deve essere = N su tutti i righi.
+Se il campo cedolare del frontespizio = 1 la cedolare deve essere = S su tutti i righi
+Se il campo cedolare del frontespizio = 2 la cedolare deve essere = N su almeno un rigo e = S su almeno un rigo.
+Se il campo cedolare del frontespizio = 3 la cedolare deve essere = N su tutti i righi.   </xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="PrimoModulo">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="LocazioneUsoAbitativo" maxOccurs="10">
+												<xs:annotation>
+													<xs:documentation>Per ogni immobile compilare un numero di righi pari al numero dei proprietari dell’immobile che figurano come locatori.</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="ImmobileNumero">
+															<xs:annotation>
+																<xs:documentation>Devono essere presenti tutti gli immobili (e soltanto quelli) che hanno categoria catastale = gruppo A (escluso A10) oppure B1  e che abbiano una rendita diversa da zero (+ relative pertinenze).
+Il regime di tassazione scelto per l’immobile principale (tipologia immobile = 1) deve valere anche per la relativa pertinenza (tipologia immobile = 2) .</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:pattern value="[0-9]*"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="LocatoreNumero">
+															<xs:annotation>
+																<xs:documentation>Non puo' essere presente un numero non presente nel quadro Soggetti - Locatori.
+Nel caso di adempimenti successivi devono essere presenti tutti i locatori presenti nel quadro Soggetti - Locatori.</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:pattern value="[0-9]*"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="PercentualePossesso" type="cm:DatoPC_Type">
+															<xs:annotation>
+																<xs:documentation>Per ogni immobile la somma delle rispettive percentuali non puo' essere maggiore di 100 ed inferiore a 99,90.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Cedolare" type="loc:Cedolare_Type"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Dichiarazioni" minOccurs="0" maxOccurs="4">
+												<xs:annotation>
+													<xs:documentation>Per ogni locatore che ha espresso l’opzione per il regime della “cedolare secca ” o la revoca del regime facoltativo indicare il codice fiscale ed apporre la firma. 
+Il codice fiscale indicato deve corrispondere a quello indicato nel rigo corrispondente del quadro Soggetti - Locatori</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="CodiceFiscale" type="cm:DatoCF_Type">
+															<xs:annotation>
+																<xs:documentation>Il codice fiscale deve essere formalmente corretto e registrato in Anagrafe tributaria e deve essere riferito ad una persona Fisica.
+La non registrazione ovvero l'indicazione di un codice fiscale riferito ad un soggetto diverso dalla persona fisica comporta lo scarto della richiesta in fase di accettazione.
+Nel caso di omocodia del codice fiscale risolta dall’Agenzia delle Entrate con l’attribuzione di un nuovo codice fiscale, l’indicazione nella richiesta del precedente codice fiscale (omocodice) comporta, in sede di accoglimento delle comunicazioni trasmesse in via telematica, lo scarto della stessa.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Firma" type="cm:DatoCB_Type"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Modulo" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="LocazioneUsoAbitativo" minOccurs="0" maxOccurs="10">
+												<xs:annotation>
+													<xs:documentation>Per ogni immobile compilare un numero di righi pari al numero dei proprietari dell’immobile che figurano come locatori.</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="ImmobileNumero">
+															<xs:annotation>
+																<xs:documentation>Devono essere presenti tutti gli immobili (e soltanto quelli) che hanno categoria catastale = gruppo A (escluso A10) oppure B1  e che abbiano una rendita diversa da zero (+ relative pertinenze).
+Il regime di tassazione scelto per l’immobile principale (tipologia immobile = 1) deve valere anche per la relativa pertinenza (tipologia immobile = 2) .</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:pattern value="[0-9]*"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="LocatoreNumero">
+															<xs:annotation>
+																<xs:documentation>Non puo' essere presente un numero non presente nel quadro Soggetti - Locatori.
+Nel caso di adempimenti successivi devono essere presenti tutti i locatori presenti nel quadro Soggetti - Locatori.</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:pattern value="[0-9]*"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="PercentualePossesso" type="cm:DatoPC_Type">
+															<xs:annotation>
+																<xs:documentation>Per ogni immobile la somma delle rispettive percentuali non puo' essere maggiore di 100 ed inferiore a 99,90.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Cedolare" type="loc:Cedolare_Type"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Dichiarazioni" minOccurs="0" maxOccurs="4">
+												<xs:annotation>
+													<xs:documentation>Per ogni locatore che ha espresso l’opzione per il regime della “cedolare secca ” o la revoca del regime facoltativo indicare il codice fiscale ed apporre la firma. 
+Il codice fiscale indicato deve corrispondere a quello indicato nel rigo corrispondente del quadro Soggetti - Locatori</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="CodiceFiscale" type="cm:DatoCF_Type">
+															<xs:annotation>
+																<xs:documentation>Il codice fiscale deve essere formalmente corretto e registrato in Anagrafe tributaria e deve essere riferito ad una persona Fisica.
+La non registrazione ovvero l'indicazione di un codice fiscale riferito ad un soggetto diverso dalla persona fisica comporta lo scarto della richiesta in fase di accettazione.
+Nel caso di omocodia del codice fiscale risolta dall’Agenzia delle Entrate con l’attribuzione di un nuovo codice fiscale, l’indicazione nella richiesta del precedente codice fiscale (omocodice) comporta, in sede di accoglimento delle comunicazioni trasmesse in via telematica, lo scarto della stessa.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Firma" type="cm:DatoCB_Type"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="CanoniVariabili" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Il quadro è obbligatorio in presenza di casi particolari 1 o 3.
+Non può essere presente negli altri casi</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="PrimoModulo">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Canoni" maxOccurs="8">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="ImportoCanone" type="cm:DatoVP_Type"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Soggetto_Type">
+		<xs:sequence>
+			<xs:element name="NumeroProgressivo">
+				<xs:annotation>
+					<xs:documentation>Se il numero dei soggetti e' superiore ai righi previsti nel modulo dovranno essere utilizzati piu' moduli avendo cura di far proseguire la numerazione “NUMERO LOCATORE/CONDUTTORE” in maniera progressiva (ad esempio 05, 06, 07, ecc.).</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{3}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodiceFiscale" type="cm:DatoCF_Type">
+				<xs:annotation>
+					<xs:documentation>"Il codice fiscale deve essere formalmente corretto e registrato in Anagrafe tributaria.
+La non registrazione comporta lo scarto della richiesta in fase di accettazione.
+Nel caso di omocodia del codice fiscale risolta dall’Agenzia delle Entrate con l’attribuzione di un nuovo codice fiscale, l’indicazione nella richiesta del precedente codice fiscale (omocodice) comporta, in sede di accoglimento delle comunicazioni trasmesse in via telematica, lo scarto della stessa."</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SoggettivitaIVA" type="cm:DatoCB_Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Se il soggetto è un locatore non può essere presente se la tipologia contratto è uguale a S1.
+Se tipologia contrattuale è uguale a T4 almeno un locatore deve barrare la casella “soggettività iva”.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="PersoneFisiche" type="sc:Dati_Anagrafici_Type">
+					<xs:annotation>
+						<xs:documentation>Può essere presente solo in caso di Codice Fiscale Alfanumerico o Codice Fiscale numerico con tipologia soggetto = 2</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SoggettiDiversiDaPF">
+					<xs:annotation>
+						<xs:documentation>Può essere presente solo in caso di Codice Fiscale numerico con tipologia soggetto assente o diversa da 2</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Denominazione">
+								<xs:simpleType>
+									<xs:restriction base="cm:DatoAN_Type">
+										<xs:maxLength value="60"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="Cedente" type="loc:Cedente-Cessionario_Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Può essere presente solo nel caso di adempimenti successivi e se Tipologia di adempimento è uguale a 3 o 6;
+Deve essere presente almeno un soggetto cedente e almeno un cessionario (nello stesso ruolo).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipologiaConduttore" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Obbligatorio nel caso di conduttore .
+Non può essere presente negli altri casi.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="cm:DatoN1_Type">
+						<xs:enumeration value="1">
+							<xs:annotation>
+								<xs:documentation><![CDATA[cooperative o enti senza scopo di lucro]]></xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="2">
+							<xs:annotation>
+								<xs:documentation><![CDATA[persona fisica con codice fiscale provvisorio]]></xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="3">
+							<xs:annotation>
+								<xs:documentation><![CDATA[soggetto diverso dai precedenti]]></xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ProprietarioNonPresente" type="cm:DatoCB_Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Può essere presente solo nel caso di locatore</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Cedente-Cessionario_Type">
+		<xs:restriction base="cm:DatoN1_Type">
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Cedente]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Cessionario]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Cedolare_Type">
+		<xs:annotation>
+			<xs:documentation>scelta dell’opzione per la cedolare secca</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cm:DatoAN_Type">
+			<xs:enumeration value="S">
+				<xs:annotation>
+					<xs:documentation><![CDATA[adesione]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="N">
+				<xs:annotation>
+					<xs:documentation><![CDATA[non adesione o revoca]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

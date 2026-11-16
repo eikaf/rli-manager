@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by ddifresco (Sogei S.p.A.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cm="urn:www.agenziaentrate.gov.it:specificheTecniche:common:v2" xmlns:sc="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:common:v2" xmlns:reg="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:reg:v1" xmlns:loc="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:loc:v1" targetNamespace="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:loc:v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:annotation>
+		<xs:documentation xml:lang="it"><![CDATA[
+		Versione 1.0 - 15/02/12
+		]]></xs:documentation>
+	</xs:annotation>
+	<xs:import namespace="urn:www.agenziaentrate.gov.it:specificheTecniche:common:v2" schemaLocation="../../common/xsd/fornitura_v2.xsd"/>
+	<xs:import namespace="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:common:v2" schemaLocation="../../common/xsd/datiFiscali_v2.xsd"/>
+	<xs:import namespace="urn:www.agenziaentrate.gov.it:specificheTecniche:sco:reg:v1" schemaLocation="../../registro/xsd/typesReg_v1.xsd"/>
+	<!--	<xs:include schemaLocation="typesIRAP_v2.xsd"/> -->
+	<xs:element name="Intestazione" type="loc:Intestazione_Type"/>
+	<xs:complexType name="Intestazione_Type">
+		<xs:sequence>
+			<xs:element name="CodiceFornitura" type="cm:CodiceFornitura_Type" fixed="RLI12">
+				<xs:annotation>
+					<xs:documentation> impostare a RLI12</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoFornitore">
+				<xs:annotation>
+					<xs:documentation>Assume i valori:
+1 - Soggetti che inviano le proprie dichiarazione.
+10 - C.A.F. dipendenti e pensionati;
+C.A.F. imprese;
+Societa' ed enti di cui all'art.3, comma 2 del DPR 322/98 (se tale societa' appartiene a un gruppo puo' trasmettere la propria dichiarazione e quelle delle aziende del gruppo);
+Altri intermediari di cui all'art.3. comma 3 lett a), b), c) ed e) del DPR 322/98;
+Societa' degli Ordini di cui all' art. 3 Decr. Dir. 18/2/99;
+Soggetto che trasmette le dichiarazioni per le quali l'impegno a trasmettere e' stato assunto da un professionista deceduto.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="cm:DatoAN_Type">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodiceFiscaleFornitore" type="cm:DatoCF_Type"/>
+			<xs:element name="SpazioUtente" type="cm:DatoAN_Type" minOccurs="0"/>
+			<xs:element name="SpazioServizioTelematico" type="cm:DatoAN_Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
