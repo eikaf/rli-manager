@@ -1,3 +1,14 @@
+<p align="center">
+  <img src="docs/images/logo.svg" alt="RLI Manager — Registrazione Locazioni Immobiliari" width="440">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white" alt="PHP 8.x">
+  <img src="https://img.shields.io/badge/MySQL%20%2F%20MariaDB-8.0%2B%20%2F%2010.5%2B-4479A1?logo=mysql&logoColor=white" alt="MySQL 8.0+ / MariaDB 10.5+">
+  <img src="https://img.shields.io/badge/XML%20AdE-RLI12-2563eb" alt="Specifiche XML AdE RLI12">
+  <img src="https://img.shields.io/badge/License-FSL--1.1--MIT-1e40af" alt="Licenza FSL-1.1-MIT">
+</p>
+
 # RLI Manager
 
 Gestionale web per la compilazione, il calcolo delle imposte e la generazione dei
@@ -33,6 +44,20 @@ telematicamente. Le funzionalità principali includono:
 - **Interfaccia con Dark Mode** impostabile come preferenza dal profilo utente.
 - **Registro comunicazioni** e template email con segnaposto dinamici.
 - **Notifiche e scadenze** con task cron dedicati.
+
+---
+
+## 📸 Anteprima e Screenshot
+
+| Dashboard | Wizard contratto |
+|:---:|:---:|
+| <img src="docs/images/dashboard.png" alt="Dashboard con scadenze, contatori e stato contratti" width="100%"> | <img src="docs/images/wizard-contratto.png" alt="Wizard stipula contratto con calcolo Cedolare Secca e Ravvedimento" width="100%"> |
+| **Dashboard** — scadenze, contatori e stato contratti | **Wizard contratto** — calcolo Cedolare Secca e Ravvedimento |
+
+| Anagrafica immobili | Dark Mode |
+|:---:|:---:|
+| <img src="docs/images/immobili.png" alt="Anagrafica immobili con stato occupazione LIBERO/LOCATO e quote" width="100%"> | <img src="docs/images/dark-mode.png" alt="Interfaccia in Dark Mode" width="100%"> |
+| **Immobili** — stato occupazione LIBERO/LOCATO e quote | **Dark Mode** — interfaccia a tema scuro |
 
 ---
 
